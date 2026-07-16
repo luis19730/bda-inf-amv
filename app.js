@@ -665,6 +665,7 @@ function renderDocs() {
             <td class="notes-cell">${(d.notes || '').substring(0, 120)}${(d.notes || '').length > 120 ? '...' : ''}</td>
             <td>
                 <button class="btn-action btn-edit" onclick="editDoc(${globalIdx})">Editar</button>
+                <button class="btn-action btn-view" onclick="printDoc(${globalIdx})">Imprimir</button>
                 <button class="btn-action btn-delete" onclick="deleteDoc(${globalIdx})">Excluir</button>
             </td>
         </tr>`;
@@ -732,6 +733,40 @@ function deleteDoc(idx) {
     deleteDocTargetIdx = idx;
     document.getElementById('deleteDocName').textContent = d.subject;
     document.getElementById('deleteDocOverlay').classList.add('active');
+}
+
+function printDoc(idx) {
+    const d = docs[idx];
+    if (!d) return;
+    const win = window.open('', '_blank');
+    win.document.write(`
+        <html><head><title>Documento para Despacho</title>
+        <style>
+            @page { size: A4; margin: 10mm 15mm; }
+            * { box-sizing: border-box; }
+            body { font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 9px; line-height: 1.3; color: #222; }
+            h2 { font-size: 13px; color: #556b2f; margin: 0 0 16px 0; text-align: center; }
+            .doc-grid { display: grid; grid-template-columns: 1fr; gap: 8px; max-width: 600px; margin: 0 auto; }
+            .doc-field label { font-size: 7px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.3px; display: block; margin-bottom: 1px; }
+            .doc-value { font-size: 8px; padding: 4px 8px; background: #f9f9f5; border: 1px solid #ddd; border-radius: 3px; line-height: 1.2; white-space: pre-wrap; }
+            .badge { display: inline-block; padding: 1px 5px; border-radius: 8px; font-size: 7px; font-weight: 700; }
+            .badge-resolved { background: #e8f0d8; color: #3d5a1f; }
+            .badge-deadline { background: #fef3c7; color: #92400e; }
+            .badge-follow { background: #dbeafe; color: #1e40af; }
+            .print-footer { text-align: center; color: #aaa; font-size: 7px; margin-top: 16px; border-top: 1px solid #eee; padding-top: 4px; }
+        </style></head><body>
+        <h2>Documento para Despacho com o Cmt Bda</h2>
+        <div class="doc-grid">
+            <div class="doc-field"><label>Nº DIEx</label><div class="doc-value">${d.diex || '-'}</div></div>
+            <div class="doc-field"><label>Assunto do Despacho</label><div class="doc-value">${d.subject}</div></div>
+            <div class="doc-field"><label>Situação</label><div class="doc-value">${docStatusBadge(d.docStatus)}</div></div>
+            <div class="doc-field"><label>Anotações</label><div class="doc-value">${d.notes || '-'}</div></div>
+        </div>
+        <div class="print-footer">Gerado em ${new Date().toLocaleString('pt-BR')}</div>
+        <script>window.print();window.close();<\/script>
+        </body></html>
+    `);
+    win.document.close();
 }
 
 function closeDeleteDocModal() {
