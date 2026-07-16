@@ -1,4 +1,5 @@
-const INITIAL_DATA = [
+// MISSIONS_DATA will be loaded from missions_data.js if available
+let INITIAL_DATA = [
     { id: "8891-E-4/EMG/Cmdo Bda Inf Amv", event: "Andamento dos Subprojetos da 4ª Seção - Brigada de Infantaria Amv 2040", deadline: "2025-10-31", responsible: "Maj Filipe", status: "ACOMPANHAR", class: "-", lastUpdate: "", notes: "1. apresentação com 01 (um) slide que resuma as principais ações de suas respectivas equipes em prol do desenvolvimento dos subprojetos demateriais e logística da Bda Inf Amv", omds: "", escSup: "" },
     { id: "25540-Escalão Logístico/2ªRM", event: "Classe II: retificação da nomenclatura da 'Mochila de Assalto' (Especificação Técnic nº62/2020) para 'Bornal de Assalto' - 2ª RM", deadline: "2025-12-22", responsible: "Maj Filipe", status: "RESOLVIDO", class: "Cl II", lastUpdate: "", notes: "2. Doc saiu para TODAS OMDS. Não precisava!!", omds: "11352-E-4/EMG/Cmdo Bda Inf Amv (22 Dez)", escSup: "-" },
     { id: "24794-Escalão Logístico/2ªRM", event: "Classe VIII - Saúde: regularização do estoque (SISCOFIS)", deadline: "2026-01-10", responsible: "ST Valter", status: "RESOLVIDO", class: "Cl VIII - Sau", lastUpdate: "", notes: "CONTROLE:\n- Ba Adm - FALTA\n- 2º BI Amv - FALTA\n- 5º BI Amv - 137-S4/5º BIL\n- 6º BI Amv - Não possui estoque - Base Adm\n- 20º GAC Amv\n- 22º B Log Amv\n- 1º Esqd C Amv\n- 5ª Bia AAAe Amv\n- 2ª Cia Prec\n- 12ª Cia Com Amv\n- 12ª Cia Eng\n- 12º Pel PE", omds: "10935-E-4/EMG/Cmdo Bda Inf Amv", escSup: "333-E-4/EMG/Cmdo Bda Inf Amv" },
@@ -113,6 +114,11 @@ const INITIAL_DOCS = [
     { diex: "-", subject: "Sol Mochila GC", docStatus: "", notes: "" },
     { diex: "-", subject: "Sol OVN", docStatus: "", notes: "" }
 ];
+
+// Use MISSIONS_DATA from missions_data.js if available
+if (typeof MISSIONS_DATA !== 'undefined' && MISSIONS_DATA.length > 0) {
+    INITIAL_DATA = MISSIONS_DATA;
+}
 
 let missions = [];
 let docs = [];
