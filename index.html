@@ -1,436 +1,276 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Controle de Missões - E4/Bda Inf Amv</title>
-    <link rel="stylesheet" href="style.css?v=2">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Sistema de Gerenciamento de Vtr - Bda Inf Amv</title>
+  <link rel="stylesheet" href="css/style.css?v=11">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="LOGO-BDA-AMV-site.png" alt="Logo BDA Inf Amv" class="header-logo">
-            <div class="header-text">
-                <h1>Controle de Missões</h1>
-                <h2>E4/Bda Inf Amv</h2>
-            </div>
-            <div class="header-date" id="currentDate"></div>
-        </div>
-    </header>
+  <header class="header">
+    <div class="header-left">
+      <div class="header-logo"><img src="img/logo.png" alt="Bda Inf Amv"></div>
+      <div class="header-title">
+        <h1>Sistema de Disponibilidade de Viaturas</h1>
+        <p>Brigada de Infantaria Aeromóvel</p>
+      </div>
+    </div>
+    <div class="header-nav">
+      <a href="index.html" class="nav-btn active">Painel de Indicadores</a>
+      <a href="gerenciar.html" class="nav-btn">Gerenciar Vtr</a>
+      <a href="proximas-missoes.html" class="nav-btn">Próx Missões</a>
+    </div>
+    <div class="header-time">
+      <div id="dataAtual"></div>
+      <div class="hora" id="horaAtual"></div>
+    </div>
+  </header>
 
-    <div class="tabs">
-        <button class="tab active" data-tab="missions">Missões</button>
-        <button class="tab" data-tab="documents">Documentos para Despacho com o Cmt Bda</button>
-        <button class="tab" data-tab="dashboard">Painel</button>
+  <main class="container">
+    <!-- Indicador Geral -->
+    <div class="indicador-geral">
+      <div class="velocimetro">
+        <canvas id="velocimetroCanvas" width="320" height="180"></canvas>
+        <div class="velocimetro-valor" id="indiceGeralValor">0%</div>
+      </div>
+      <div class="indicador-geral-info">
+        <h2>Índice Geral de Disponibilidade da Brigada</h2>
+        <p>Percentual de viaturas não blindadas Disponíveis</p>
+        <div class="status-badges">
+          <div class="status-badge pronta"><span class="dot"></span><span id="badgeProntas">0</span> Disponíveis</div>
+        </div>
+      </div>
     </div>
 
-    <!-- Missões Tab -->
-    <div class="tab-content active" id="tab-missions">
-    <div class="stats-bar">
-        <div class="stat-card">
-            <span class="stat-number" id="totalMissions">0</span>
-            <span class="stat-label">Total</span>
-        </div>
-        <div class="stat-card resolved">
-            <span class="stat-number" id="resolvedCount">0</span>
-            <span class="stat-label">Resolvido</span>
-        </div>
-        <div class="stat-card follow">
-            <span class="stat-number" id="followCount">0</span>
-            <span class="stat-label">Acompanhar</span>
-        </div>
-        <div class="stat-card deadline">
-            <span class="stat-number" id="deadlineCount">0</span>
-            <span class="stat-label">Prazo Resposta</span>
-        </div>
-        <div class="stat-card overdue">
-            <span class="stat-number" id="overdueCount">0</span>
-            <span class="stat-label">Atrasado</span>
-        </div>
+    <!-- Cards de Indicadores -->
+    <div class="indicadores-grid">
+      <div class="indicador-card blue">
+        <div class="label">Total Frota (Não Blindada)</div>
+        <div class="valor" id="totalFrota">0</div>
+        <div class="sub">12 OMs</div>
+      </div>
+      <div class="indicador-card green">
+        <div class="label">Vtr Disponíveis</div>
+        <div class="valor" id="vtrProntas">0</div>
+        <div class="sub">Disponíveis para emprego imediato</div>
+      </div>
+
+
     </div>
 
-    <div class="toolbar">
-        <button class="btn btn-primary" id="btnNew">+ Nova Missão</button>
-        <button class="btn btn-secondary" id="btnExport">Exportar CSV</button>
-        <label class="btn btn-import" id="btnImportMissao">
-            Importar PDF
-            <input type="file" accept=".pdf" id="fileImportMissao" hidden>
-        </label>
-        <button class="btn btn-secondary" id="btnRestoreMissions" title="Restaurar missões iniciais">Restaurar</button>
-        <button class="btn btn-overdue" id="btnAtrasados">Atrasados</button>
-        <button class="btn btn-deadline" id="btnPrazoResposta">Prazo de Resposta</button>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Buscar missão...">
-        </div>
-        <div class="search-box">
-            <input type="text" id="searchDiex" placeholder="Nº DIEx...">
-        </div>
-        <div class="filter-group">
-            <label class="date-label">Prazo:</label>
-            <input type="date" id="filterDateStart">
-            <span class="date-separator">até</span>
-            <input type="date" id="filterDateEnd">
-            <button class="btn btn-secondary btn-small" id="btnClearDate">Limpar</button>
-        </div>
-        <div class="filter-group">
-            <select id="filterStatus">
-                <option value="">Todas Situações</option>
-                <option value="RESOLVIDO">Resolvido</option>
-                <option value="ACOMPANHAR">Acompanhar</option>
-                <option value="PRAZO DE RESPOSTA">Prazo de Resposta</option>
-                <option value="EVENTO">Evento</option>
-                <option value="Missão Cmt Bda">Missão Cmt Bda</option>
-                <option value="CALENDÁRIO DE OBRIGAÇÕES">Calendário de Obrigações</option>
-            </select>
-            <select id="filterClass">
-                <option value="">Todas Classes</option>
-                <option value="Cl I">Cl I</option>
-                <option value="Cl II">Cl II</option>
-                <option value="Cl III - Comb">Cl III - Comb</option>
-                <option value="Cl V">Cl V</option>
-                <option value="Cl VI">Cl VI</option>
-                <option value="Cl VII">Cl VII</option>
-                <option value="Cl VIII - Sau">Cl VIII - Sau</option>
-                <option value="Cl IX">Cl IX</option>
-                <option value="Orçamentário">Orçamentário</option>
-                <option value="Trnp">Trnp</option>
-                <option value="Mnt">Mnt</option>
-                <option value="MEM">MEM</option>
-                <option value="PREPARO F TER">Preparo F Ter</option>
-                <option value="Desfazimento">Desfazimento</option>
-                <option value="Patrimônio">Patrimônio</option>
-                <option value="VISITAS">Visitas</option>
-                <option value="NOVOS MEM">Novos MEM</option>
-            </select>
-            <select id="filterResponsible">
-                <option value="">Todos Militares</option>
-                <option value="Maj Filipe">Maj Filipe</option>
-                <option value="ST Valter">ST Valter</option>
-                <option value="ST Richardson">ST Richardson</option>
-                <option value="Cap Luis Augusto">Cap Luis Augusto</option>
-                <option value="Ten Glauco">Ten Glauco</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table id="missionsTable">
-            <thead>
+    <!-- Cadastramento de Viaturas -->
+    <div class="secao" id="cadastro">
+      <div class="secao-header">
+        <h2>Cadastramento de Viaturas por OM</h2>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;" id="botoesOMs"></div>
+        <div id="composicaoContainer" style="display:none;margin-top:16px;">
+          <h3 style="margin:0 0 12px 0;font-size:15px;" id="omTitulo"></h3>
+          <div style="overflow-x:auto;">
+            <table class="tabela-composicao">
+              <thead>
                 <tr>
-                    <th class="sortable" data-col="id">Nº DIEx <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="event">Evento ou Missão <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="deadline">Prazo <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="daysLeft">Dias <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="responsible">Militar Resp. <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="status">Situação <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="class">Classe <span class="sort-arrow"></span></th>
-                    <th>Data Atualização</th>
-                    <th>Anotações</th>
-                    <th>Nº DIEx Enc. OMDS</th>
-                    <th>Nº DIEx Esc Superior</th>
-                    <th class="no-sort">Ações</th>
+                  <th style="text-align:left;min-width:220px;">Tipo de Vtr</th>
+                  <th style="text-align:center;min-width:100px;">Total de Vtr OM</th>
+                  <th style="text-align:center;min-width:120px;">Qnt Vtr Indisponíveis</th>
+                  <th style="text-align:center;min-width:120px;">% Disponibilidade</th>
+                  <th style="text-align:center;min-width:120px;">Ações</th>
                 </tr>
-            </thead>
-            <tbody id="missionsBody">
-            </tbody>
+              </thead>
+              <tbody id="composicaoTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="mensagem" style="display:none;margin-top:16px;padding:16px;border-radius:8px;font-weight:600;"></div>
+    </div>
+
+    <!-- Índice por OM -->
+    <div class="secao">
+      <div class="secao-header">
+        <h2>Índice de Disponibilidade por Organização Militar</h2>
+      </div>
+      <div class="tabela-om" id="tabelaOmContainer">
+        <table>
+          <thead>
+            <tr>
+              <th>Organização Militar (OM)</th>
+              <th>Total Frota</th>
+              <th>Vtr Disponíveis</th>
+              <th>Índice de Disponibilidade</th>
+              <th>Visual</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaOmBody">
+            <tr><td colspan="5" class="loading">Carregando dados...</td></tr>
+          </tbody>
         </table>
+      </div>
     </div>
 
-    <div class="pagination" id="pagination"></div>
+    <!-- Gráfico de Barras Comparativo -->
+    <div class="secao">
+      <div class="secao-header">
+        <h2>Comparativo de Disponibilidade entre OMs</h2>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px;">
+        <div class="grafico-barras" id="graficoBarras"></div>
+        <div style="display:flex; gap:16px; justify-content:center; margin-top:12px;">
+          <span style="font-size:11px; color:var(--text-muted); display:flex; align-items:center; gap:4px;"><span style="width:10px;height:10px;background:var(--green);border-radius:2px;display:inline-block;"></span> Disponíveis</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Documentos Tab -->
-    <div class="tab-content" id="tab-documents">
-    <div class="stats-bar">
-        <div class="stat-card">
-            <span class="stat-number" id="totalDocs">0</span>
-            <span class="stat-label">Total</span>
-        </div>
-        <div class="stat-card resolved">
-            <span class="stat-number" id="resolvedDocs">0</span>
-            <span class="stat-label">Resolvido</span>
-        </div>
-        <div class="stat-card follow">
-            <span class="stat-number" id="pendingDocs">0</span>
-            <span class="stat-label">Aguardando</span>
-        </div>
-        <div class="stat-card deadline">
-            <span class="stat-number" id="scheduledDocs">0</span>
-            <span class="stat-label">Agendar</span>
-        </div>
+    <div class="pareto-card" style="margin-bottom:24px;">
+      <h3>📊 Disponibilidade por OM</h3>
+      <div id="pizzaContainer" class="pizza-grid">
+        <div class="loading">Carregando...</div>
+      </div>
     </div>
 
-    <div class="toolbar">
-        <button class="btn btn-primary" id="btnNewDoc">+ Novo Documento</button>
-        <button class="btn btn-secondary" id="btnExportDoc">Exportar CSV</button>
-        <button class="btn btn-secondary" id="btnRestoreDocs" title="Restaurar documentos iniciais">Restaurar</button>
-        <label class="btn btn-import" id="btnImportDoc">
-            Importar PDF
-            <input type="file" accept=".pdf" id="fileImportDoc" hidden>
-        </label>
-        <div class="search-box">
-            <input type="text" id="searchDocInput" placeholder="Buscar documento...">
-        </div>
-        <div class="search-box">
-            <input type="text" id="searchDocDiex" placeholder="Nº DIEx...">
-        </div>
-        <div class="filter-group">
-            <select id="filterDocStatus">
-                <option value="">Todas Situações</option>
-                <option value="AGENDAR">Agendar</option>
-                <option value="RESOLVIDO">Resolvido</option>
-                <option value="PENDENTE">Pendente</option>
-            </select>
-        </div>
+    <!-- Detalhamento por OM -->
+    <div class="secao">
+      <div class="secao-header">
+        <h2>Detalhamento por Organização Militar</h2>
+      </div>
+      <div id="detalhamentoOmContainer"></div>
     </div>
+  </main>
 
-    <div class="table-container">
-        <table id="docsTable">
-            <thead>
-                <tr>
-                    <th class="sortable" data-col="diex">Nº DIEx <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="subject">Assunto do Despacho <span class="sort-arrow"></span></th>
-                    <th class="sortable" data-col="docStatus">Situação do Despacho <span class="sort-arrow"></span></th>
-                    <th>Anotações</th>
-                    <th class="no-sort">Ações</th>
-                </tr>
-            </thead>
-            <tbody id="docsBody">
-            </tbody>
-        </table>
-    </div>
+  <script src="js/modo-estatico.js?v=11"></script>
+  <script src="js/dashboard.js?v=11"></script>
+  <script>
+    const TIPOS = [
+      'VTP 5 Psg', 'VTP Picape 5 Psg', 'VTP Ônibus', 'VTP Micro-ônibus', 'VTP Van 14 a 16 Psg',
+      'VTNE ¾ Ton', 'VTNE 5 Ton', 'VTNE 2 ½ Ton',
+      'VTE Ambulância', 'VTE Cisterna Água', 'VTE Cisterna Combustível', 'VTE Baú',
+      'VTP Motocicleta', 'VSRNE Reboque'
+    ];
 
-    <div class="pagination" id="paginationDocs"></div>
-    </div>
+    let omIdAtual = null;
 
-    <!-- Modal Missões -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal" id="missionModal">
-            <div class="modal-header">
-                <h3 id="modalTitle">Nova Missão</h3>
-                <button class="modal-close" id="btnClose">&times;</button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" id="editId">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fieldId">Nº DIEx da Missão</label>
-                        <input type="text" id="fieldId" placeholder="Ex: 8891-E-4/EMG/Cmdo Bda Inf Amv">
-                    </div>
-                    <div class="form-group">
-                        <label for="fieldEvent">Evento ou Missão</label>
-                        <input type="text" id="fieldEvent" placeholder="Descrição da missão">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fieldDeadline">Prazo</label>
-                        <input type="date" id="fieldDeadline">
-                    </div>
-                    <div class="form-group">
-                        <label for="fieldResponsible">Militar Responsável</label>
-                        <select id="fieldResponsible">
-                            <option value="">Selecione</option>
-                            <option value="Maj Filipe">Maj Filipe</option>
-                            <option value="ST Valter">ST Valter</option>
-                            <option value="ST Richardson">ST Richardson</option>
-                            <option value="Cap Luis Augusto">Cap Luis Augusto</option>
-                            <option value="Ten Glauco">Ten Glauco</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fieldStatus">Situação</label>
-                        <select id="fieldStatus">
-                            <option value="ACOMPANHAR">Acompanhar</option>
-                            <option value="RESOLVIDO">Resolvido</option>
-                            <option value="PRAZO DE RESPOSTA">Prazo de Resposta</option>
-                            <option value="EVENTO">Evento</option>
-                            <option value="Missão Cmt Bda">Missão Cmt Bda</option>
-                            <option value="CALENDÁRIO DE OBRIGAÇÕES">Calendário de Obrigações</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="fieldClass">Classe</label>
-                        <select id="fieldClass">
-                            <option value="-">-</option>
-                            <option value="Cl I">Cl I</option>
-                            <option value="Cl II">Cl II</option>
-                            <option value="Cl III - Comb">Cl III - Comb</option>
-                            <option value="Cl V">Cl V</option>
-                            <option value="Cl VI">Cl VI</option>
-                            <option value="Cl VII">Cl VII</option>
-                            <option value="Cl VIII - Sau">Cl VIII - Sau</option>
-                            <option value="Cl IX">Cl IX</option>
-                            <option value="Orçamentário">Orçamentário</option>
-                            <option value="Trnp">Trnp</option>
-                            <option value="Mnt">Mnt</option>
-                            <option value="MEM">MEM</option>
-                            <option value="PREPARO F TER">PREPARO F TER</option>
-                            <option value="Desfazimento">Desfazimento</option>
-                            <option value="Patrimônio">Patrimônio</option>
-                            <option value="VISITAS">VISITAS</option>
-                            <option value="NOVOS MEM">NOVOS MEM</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group full-width">
-                    <label for="fieldNotes">Anotações</label>
-                    <textarea id="fieldNotes" rows="4" placeholder="Observações sobre a missão..."></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fieldOmds">Nº DIEx Encaminhamento OMDS</label>
-                        <input type="text" id="fieldOmds" placeholder="Nº DIEx para OMDS">
-                    </div>
-                    <div class="form-group">
-                        <label for="fieldEscSup">Nº DIEx para Esc Superior</label>
-                        <input type="text" id="fieldEscSup" placeholder="Nº DIEx para Esc Superior">
-                    </div>
-                </div>
-                <div class="form-group full-width">
-                    <label for="fieldLastUpdate">Data da Última Atualização</label>
-                    <input type="date" id="fieldLastUpdate">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btnCancel">Cancelar</button>
-                <button class="btn btn-primary" id="btnSave">Salvar</button>
-            </div>
-        </div>
-    </div>
+    function indicadorCor(pct) {
+      return pct >= 85 ? '#22c55e' : pct >= 70 ? '#eab308' : '#ef4444';
+    }
 
-    <!-- Delete Confirmation Modal -->
-    <div class="modal-overlay" id="deleteOverlay">
-        <div class="modal modal-small">
-            <div class="modal-header">
-                <h3>Confirmar Exclusão</h3>
-                <button class="modal-close" id="btnCloseDelete">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Tem certeza que deseja excluir esta missão?</p>
-                <p class="delete-mission-name" id="deleteMissionName"></p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btnCancelDelete">Cancelar</button>
-                <button class="btn btn-danger" id="btnConfirmDelete">Excluir</button>
-            </div>
-        </div>
-    </div>
+    async function carregarBotoesOMs() {
+      const [omsRes, statusRes] = await Promise.all([
+        fetch(API+'/oms'),
+        fetch(API+'/oms/status')
+      ]);
+      const oms = await omsRes.json();
+      const status = await statusRes.json();
+      const mapa = {};
+      status.forEach(function(s) { mapa[s.id] = s.indice_disponibilidade; });
+      const container = document.getElementById('botoesOMs');
+      container.innerHTML = oms.map(function(o) {
+        var pct = mapa[o.id] || 0;
+        var cor = indicadorCor(pct);
+        return '<button class="btn btn-secondary" data-id="' + o.id + '" onclick="selecionarOM(' + o.id + ')" style="font-size:10px;padding:4px 4px;white-space:nowrap;display:flex;align-items:center;gap:3px;justify-content:center;">' +
+          '<span style="width:8px;height:8px;border-radius:50%;background:' + cor + ';display:inline-block;"></span>' +
+          o.sigla + ' <span style="font-size:10px;opacity:0.7;">' + pct + '%</span></button>';
+      }).join('');
+    }
+    carregarBotoesOMs();
 
-    <!-- Modal Documentos -->
-    <div class="modal-overlay" id="modalDocOverlay">
-        <div class="modal" id="docModal">
-            <div class="modal-header">
-                <h3 id="modalDocTitle">Novo Documento</h3>
-                <button class="modal-close" id="btnCloseDoc">&times;</button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" id="editDocId">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fieldDocDiex">Nº DIEx</label>
-                        <input type="text" id="fieldDocDiex" placeholder="Ex: 2295-E4/2ª DE">
-                    </div>
-                    <div class="form-group">
-                        <label for="fieldDocSubject">Assunto do Despacho</label>
-                        <input type="text" id="fieldDocSubject" placeholder="Descrição do despacho">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fieldDocStatus">Situação do Despacho</label>
-                        <select id="fieldDocStatus">
-                            <option value="AGENDAR">Agendar</option>
-                            <option value="RESOLVIDO">Resolvido</option>
-                            <option value="PENDENTE">Pendente</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group full-width">
-                    <label for="fieldDocNotes">Anotações</label>
-                    <textarea id="fieldDocNotes" rows="4" placeholder="Observações sobre o despacho..."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btnCancelDoc">Cancelar</button>
-                <button class="btn btn-primary" id="btnSaveDoc">Salvar</button>
-            </div>
-        </div>
-    </div>
+    async function selecionarOM(id) {
+      omIdAtual = id;
+      document.getElementById('botoesOMs').querySelectorAll('button').forEach(function(b) { b.classList.remove('btn-primary'); b.classList.add('btn-secondary'); });
+      var btn = document.getElementById('botoesOMs').querySelector('button[data-id="' + id + '"]');
+      if (btn) { btn.classList.remove('btn-secondary'); btn.classList.add('btn-primary'); }
+      var res = await fetch(API+'/composicao?om_id=' + id);
+      var dados = await res.json();
+      var titulo = (btn ? btn.textContent.replace(/[0-9]+%/g,'').trim() : 'OM ' + id);
+      document.getElementById('omTitulo').textContent = titulo;
+      renderizarTabela(dados || {});
+      document.getElementById('composicaoContainer').style.display = 'block';
+    }
 
-    <!-- Delete Confirmation Modal Documentos -->
-    <div class="modal-overlay" id="deleteDocOverlay">
-        <div class="modal modal-small">
-            <div class="modal-header">
-                <h3>Confirmar Exclusão</h3>
-                <button class="modal-close" id="btnCloseDeleteDoc">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Tem certeza que deseja excluir este documento?</p>
-                <p class="delete-mission-name" id="deleteDocName"></p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btnCancelDeleteDoc">Cancelar</button>
-                <button class="btn btn-danger" id="btnConfirmDeleteDoc">Excluir</button>
-            </div>
-        </div>
-    </div>
+    function renderizarTabela(dados) {
+      const tbody = document.getElementById('composicaoTbody');
+      tbody.innerHTML = TIPOS.map(function(tipo) {
+        const info = dados[tipo] || { total: 0, indisponiveis: 0 };
+        const total = info.total || 0;
+        const indisp = info.indisponiveis || 0;
+        const prontas = total - indisp;
+        const pct = total > 0 ? ((prontas / total) * 100).toFixed(1) : 0;
+        const cor = pct >= 85 ? 'var(--green)' : pct >= 70 ? 'var(--yellow)' : 'var(--red)';
+        var temDados = total > 0;
+        var readonlyAttr = temDados ? 'readonly' : '';
+        var bgStyle = temDados ? 'background:#000;cursor:not-allowed;' : '';
+        var btnText = temDados ? 'Alterar' : 'Salvar';
+        var btnClass = temDados ? 'btn btn-secondary btn-row' : 'btn btn-primary btn-row';
+        var btnClick = temDados ? "alterarLinha('" + tipo + "')" : "salvarLinha('" + tipo + "')";
+        return '<tr>' +
+          '<td style="font-weight:600;">' + tipo + '</td>' +
+          '<td style="text-align:center;padding:4px;"><input type="number" min="0" class="input-comp total-input" data-tipo="' + tipo + '" value="' + total + '" ' + readonlyAttr + ' style="width:70px;text-align:center;padding:6px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text-primary);' + bgStyle + '"></td>' +
+          '<td style="text-align:center;padding:4px;"><input type="number" min="0" class="input-comp indisp-input" data-tipo="' + tipo + '" value="' + indisp + '" ' + readonlyAttr + ' style="width:70px;text-align:center;padding:6px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text-primary);' + bgStyle + '"></td>' +
+          '<td style="text-align:center;font-weight:700;color:' + cor + ';" class="pct-cell" data-tipo="' + tipo + '">' + pct + '%</td>' +
+          '<td style="text-align:center;padding:4px;"><button class="' + btnClass + '" data-tipo="' + tipo + '" onclick="' + btnClick + '" style="font-size:11px;padding:4px 10px;">' + btnText + '</button></td>' +
+        '</tr>';
+      }).join('');
+      document.querySelectorAll('.input-comp:not([readonly])').forEach(function(el) {
+        el.addEventListener('input', atualizarPct);
+      });
+    }
 
-    <!-- View Mission Modal -->
-    <div class="modal-overlay" id="viewOverlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Visualizar Missão</h3>
-                <button class="modal-close" id="btnCloseView">&times;</button>
-            </div>
-            <div class="modal-body" id="viewMissionContent">
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="btnPrintView">Imprimir</button>
-                <button class="btn btn-secondary" id="btnCloseViewFooter">Fechar</button>
-            </div>
-        </div>
-    </div>
+    function atualizarPct() {
+      document.querySelectorAll('.pct-cell').forEach(function(td) {
+        const tipo = td.getAttribute('data-tipo');
+        const total = parseInt(document.querySelector('.total-input[data-tipo="' + tipo + '"]').value) || 0;
+        const indisp = parseInt(document.querySelector('.indisp-input[data-tipo="' + tipo + '"]').value) || 0;
+        const prontas = total - indisp;
+        const pct = total > 0 ? ((prontas / total) * 100).toFixed(1) : 0;
+        const cor = pct >= 85 ? 'var(--green)' : pct >= 70 ? 'var(--yellow)' : 'var(--red)';
+        td.textContent = pct + '%';
+        td.style.color = cor;
+      });
+    }
 
-    <!-- Dashboard Tab -->
-    <div class="tab-content" id="tab-dashboard">
-        <div class="dashboard-header">
-            <h3>Painel de Desempenho</h3>
-            <button class="btn btn-secondary" id="btnRefreshDashboard">Atualizar</button>
-        </div>
-        <div class="dashboard-grid">
-            <div class="chart-card">
-                <h4>Missões por Situação</h4>
-                <div class="chart-container">
-                    <canvas id="chartStatus"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h4>Missões por Responsável</h4>
-                <div class="chart-container">
-                    <canvas id="chartResponsible"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h4>Missões por Classe</h4>
-                <div class="chart-container chart-container-wide">
-                    <canvas id="chartClass"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h4>Missões Atrasadas vs No Prazo</h4>
-                <div class="chart-container">
-                    <canvas id="chartOverdue"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+    function alterarLinha(tipo) {
+      var inputs = document.querySelectorAll('.total-input[data-tipo="' + tipo + '"], .indisp-input[data-tipo="' + tipo + '"]');
+      inputs.forEach(function(el) { el.removeAttribute('readonly'); el.style.background = 'var(--bg-secondary)'; el.style.cursor = 'text'; el.addEventListener('input', atualizarPct); });
+      var btn = document.querySelector('.btn-row[data-tipo="' + tipo + '"]');
+      btn.textContent = 'Salvar';
+      btn.className = 'btn btn-primary btn-row';
+      btn.onclick = function() { salvarLinha(tipo); };
+    }
 
-    <script src="missions_data.js"></script>
-    <script src="app.js"></script>
+    async function salvarLinha(tipo) {
+      if (!omIdAtual) { alert('Selecione uma OM.'); return; }
+      var total = parseInt(document.querySelector('.total-input[data-tipo="' + tipo + '"]').value) || 0;
+      var indisp = parseInt(document.querySelector('.indisp-input[data-tipo="' + tipo + '"]').value) || 0;
+      var dados = {};
+      dados[tipo] = { total: total, indisponiveis: indisp };
+      try {
+        const res = await fetch(API+'/composicao', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ om_id: omIdAtual, dados: dados })
+        });
+        const r = await res.json();
+        const msg = document.getElementById('mensagem');
+        msg.style.display = 'block';
+        if (res.ok) {
+          msg.style.background = 'var(--green-bg, #e6ffe6)';
+          msg.style.color = 'var(--green, #2e7d32)';
+          msg.style.border = '1px solid var(--green, #2e7d32)';
+          msg.textContent = tipo + ' salvo com sucesso!';
+          setTimeout(function() { location.reload(); }, 500);
+        } else {
+          msg.style.background = 'var(--red-bg, #ffe6e6)';
+          msg.style.color = 'var(--red, #c62828)';
+          msg.style.border = '1px solid var(--red, #c62828)';
+          msg.textContent = r.erro || 'Erro ao salvar';
+        }
+        setTimeout(function() { msg.style.display = 'none'; }, 3000);
+      } catch(e) { alert('Erro de conexao.'); }
+    }
+  </script>
 </body>
 </html>
