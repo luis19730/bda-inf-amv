@@ -1,0 +1,2706 @@
+﻿{
+    "oms":  [
+                {
+                    "id":  1,
+                    "sigla":  "Cmdo Bda",
+                    "nome_completo":  "Comando da Brigada de Infantaria Leve (Aeromóvel)",
+                    "tipo":  "Comando",
+                    "total_frota":  0
+                },
+                {
+                    "id":  2,
+                    "sigla":  "2º BI Amv",
+                    "nome_completo":  "2º Batalhão de Infantaria Leve (Aeromóvel)",
+                    "tipo":  "Batalhão",
+                    "total_frota":  0
+                },
+                {
+                    "id":  3,
+                    "sigla":  "5º BI Amv",
+                    "nome_completo":  "5º Batalhão de Infantaria Leve (Aeromóvel)",
+                    "tipo":  "Batalhão",
+                    "total_frota":  0
+                },
+                {
+                    "id":  4,
+                    "sigla":  "6º BI Amv",
+                    "nome_completo":  "6º Batalhão de Infantaria Leve (Aeromóvel)",
+                    "tipo":  "Batalhão",
+                    "total_frota":  0
+                },
+                {
+                    "id":  5,
+                    "sigla":  "20º GAC Amv",
+                    "nome_completo":  "20º Grupo de Artilharia de Campanha (Aeromóvel)",
+                    "tipo":  "Grupo",
+                    "total_frota":  0
+                },
+                {
+                    "id":  6,
+                    "sigla":  "22º B Log Amv",
+                    "nome_completo":  "22º Batalhão Logístico (Aeromóvel)",
+                    "tipo":  "Batalhão",
+                    "total_frota":  0
+                },
+                {
+                    "id":  7,
+                    "sigla":  "1º Esqd C Amv",
+                    "nome_completo":  "1º Esquadrão de Cavalaria (Aeromóvel)",
+                    "tipo":  "Esquadrão",
+                    "total_frota":  0
+                },
+                {
+                    "id":  8,
+                    "sigla":  "12ª Cia E Cmb",
+                    "nome_completo":  "12ª Companhia de Engenharia de Combate (Aeromóvel)",
+                    "tipo":  "Companhia",
+                    "total_frota":  0
+                },
+                {
+                    "id":  9,
+                    "sigla":  "5ª Bia AAAé",
+                    "nome_completo":  "5ª Bateria Antiaérea (Aeromóvel)",
+                    "tipo":  "Bateria",
+                    "total_frota":  0
+                },
+                {
+                    "id":  10,
+                    "sigla":  "Cia C Bda",
+                    "nome_completo":  "Companhia de Comando da Brigada (Aeromóvel)",
+                    "tipo":  "Companhia",
+                    "total_frota":  0
+                },
+                {
+                    "id":  11,
+                    "sigla":  "12ª Cia Com",
+                    "nome_completo":  "12ª Companhia de Comunicações (Aeromóvel)",
+                    "tipo":  "Companhia",
+                    "total_frota":  0
+                },
+                {
+                    "id":  12,
+                    "sigla":  "12º Pel PE",
+                    "nome_completo":  "12º Pelotão de Polícia do Exército",
+                    "tipo":  "Pelotão",
+                    "total_frota":  0
+                }
+            ],
+    "viaturas":  [
+
+                 ],
+    "status_atual":  [
+
+                     ],
+    "historico":  [
+                      {
+                          "viatura_id":  1,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  2,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  3,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  4,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  5,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  6,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  7,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  8,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  9,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  10,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  11,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Troca de óleo programada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  12,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  13,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  14,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  15,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  16,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  17,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  18,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  19,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  20,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  21,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  22,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  23,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  24,
+                          "status":  "Restrição",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  25,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  26,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  27,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  28,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  29,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  30,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  31,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  32,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  33,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  34,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  35,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  36,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  37,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  38,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  39,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  40,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  41,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  42,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  43,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  44,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  45,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  46,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  47,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  48,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  49,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  50,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  51,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  52,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  53,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  54,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  55,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  56,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  57,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Troca de óleo programada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  58,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Aguardando vistoria",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  59,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  60,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Freio desgastado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  61,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  62,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  63,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Farol quebrado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  64,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Aguardando vistoria",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  65,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  66,
+                          "status":  "Restrição",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  67,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  68,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  69,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  70,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  71,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  72,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  73,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  74,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  75,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  76,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  77,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  78,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  79,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  80,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  81,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  82,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  83,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  84,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  85,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  86,
+                          "status":  "Restrição",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  87,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  88,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  89,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Problema elétrico",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  90,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  91,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  92,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  93,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  94,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  95,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  96,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Problema elétrico",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  97,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  98,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  99,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  100,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Aguardando vistoria",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  101,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  102,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  103,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  104,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  105,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Troca de óleo programada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  106,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  107,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Retífica de motor",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  108,
+                          "status":  "Restrição",
+                          "gargalo":  "Motor fundido",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  109,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  110,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  111,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  112,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  113,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  114,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  115,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  116,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  117,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  118,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  119,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  120,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  121,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  122,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  123,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  124,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Aguardando vistoria",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  125,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  126,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  127,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  128,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  129,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  130,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  131,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Farol quebrado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  132,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Troca de óleo programada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  133,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  134,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  135,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  136,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  137,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  138,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  139,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Farol quebrado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  140,
+                          "status":  "Restrição",
+                          "gargalo":  "Problema elétrico",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  141,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  142,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  143,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  144,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  145,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  146,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  147,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  148,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  149,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  150,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  151,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  152,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  153,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  154,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  155,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  156,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  157,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  158,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  159,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  160,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Freio desgastado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  161,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  162,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  163,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  164,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  165,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  166,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  167,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  168,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  169,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  170,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  171,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Freio desgastado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  172,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  173,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  174,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Farol quebrado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  175,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  176,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  177,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  178,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  179,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  180,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  181,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  182,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  183,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  184,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  185,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  186,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Motor fundido",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  187,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  188,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  189,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  190,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Motor fundido",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  191,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  192,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  193,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  194,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  195,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Retífica de motor",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  196,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  197,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  198,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  199,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  200,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  201,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  202,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  203,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Motor fundido",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  204,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  205,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  206,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  207,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Freio desgastado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  208,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  209,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  210,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Suspensão desregulada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  211,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  212,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  213,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  214,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  215,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  216,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  217,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  218,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  219,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  220,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  221,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  222,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  223,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Freio desgastado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  224,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  225,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  226,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Troca de óleo programada",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  227,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  228,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  229,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  230,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  231,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  232,
+                          "status":  "Restrição",
+                          "gargalo":  "Aguardando vistoria",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  233,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  234,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Freio desgastado",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  235,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  236,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  237,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Problema elétrico",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  238,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Problema elétrico",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  239,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  240,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  241,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  242,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  243,
+                          "status":  "Restrição",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  244,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  245,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  246,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  247,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Retífica de motor",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  248,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  249,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  250,
+                          "status":  "Restrição",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  251,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  252,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  253,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  254,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  255,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Motor fundido",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  256,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  257,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  258,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  259,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  260,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  261,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  262,
+                          "status":  "Manutenção Externa",
+                          "gargalo":  "Aguardando pneu",
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  263,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  264,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  265,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  266,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  267,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  268,
+                          "status":  "Manutenção Orgânica",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  269,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  270,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      },
+                      {
+                          "viatura_id":  271,
+                          "status":  "Pronta",
+                          "gargalo":  null,
+                          "data_registro":  "2026-07-19T00:01:17.711Z",
+                          "registrado_por":  "Sistema",
+                          "observacao":  null
+                      }
+                  ],
+    "pareto":  [
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  1,
+                       "viatura_id":  6,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  1,
+                       "viatura_id":  11,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  2,
+                       "viatura_id":  17,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  2,
+                       "viatura_id":  24,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  2,
+                       "viatura_id":  26,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  2,
+                       "viatura_id":  47,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  3,
+                       "viatura_id":  48,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  3,
+                       "viatura_id":  52,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  3,
+                       "viatura_id":  53,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  3,
+                       "viatura_id":  54,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  3,
+                       "viatura_id":  57,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Manutenção Preventiva",
+                       "om_id":  3,
+                       "viatura_id":  58,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Freios",
+                       "om_id":  3,
+                       "viatura_id":  60,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Carroceria",
+                       "om_id":  3,
+                       "viatura_id":  63,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Manutenção Preventiva",
+                       "om_id":  3,
+                       "viatura_id":  64,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  3,
+                       "viatura_id":  66,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  3,
+                       "viatura_id":  70,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  3,
+                       "viatura_id":  82,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  4,
+                       "viatura_id":  86,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Sistema Elétrico",
+                       "om_id":  4,
+                       "viatura_id":  89,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Sistema Elétrico",
+                       "om_id":  4,
+                       "viatura_id":  96,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Manutenção Preventiva",
+                       "om_id":  4,
+                       "viatura_id":  100,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  4,
+                       "viatura_id":  102,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  4,
+                       "viatura_id":  105,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  4,
+                       "viatura_id":  107,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  4,
+                       "viatura_id":  108,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  4,
+                       "viatura_id":  109,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  4,
+                       "viatura_id":  113,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  4,
+                       "viatura_id":  115,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Manutenção Preventiva",
+                       "om_id":  5,
+                       "viatura_id":  124,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  5,
+                       "viatura_id":  129,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Carroceria",
+                       "om_id":  5,
+                       "viatura_id":  131,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  5,
+                       "viatura_id":  132,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  5,
+                       "viatura_id":  134,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  5,
+                       "viatura_id":  136,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Carroceria",
+                       "om_id":  5,
+                       "viatura_id":  139,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Sistema Elétrico",
+                       "om_id":  5,
+                       "viatura_id":  140,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  6,
+                       "viatura_id":  148,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  6,
+                       "viatura_id":  156,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Freios",
+                       "om_id":  6,
+                       "viatura_id":  160,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  6,
+                       "viatura_id":  167,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Freios",
+                       "om_id":  6,
+                       "viatura_id":  171,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  6,
+                       "viatura_id":  173,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Carroceria",
+                       "om_id":  6,
+                       "viatura_id":  174,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  6,
+                       "viatura_id":  179,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  6,
+                       "viatura_id":  180,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  6,
+                       "viatura_id":  181,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  6,
+                       "viatura_id":  186,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  6,
+                       "viatura_id":  190,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  7,
+                       "viatura_id":  192,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  7,
+                       "viatura_id":  195,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  7,
+                       "viatura_id":  197,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  7,
+                       "viatura_id":  199,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  7,
+                       "viatura_id":  203,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  7,
+                       "viatura_id":  205,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Freios",
+                       "om_id":  8,
+                       "viatura_id":  207,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Suspensão",
+                       "om_id":  8,
+                       "viatura_id":  210,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  8,
+                       "viatura_id":  219,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Freios",
+                       "om_id":  8,
+                       "viatura_id":  223,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  9,
+                       "viatura_id":  226,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  9,
+                       "viatura_id":  229,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Manutenção Preventiva",
+                       "om_id":  9,
+                       "viatura_id":  232,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Freios",
+                       "om_id":  9,
+                       "viatura_id":  234,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Sistema Elétrico",
+                       "om_id":  9,
+                       "viatura_id":  237,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Sistema Elétrico",
+                       "om_id":  10,
+                       "viatura_id":  238,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  10,
+                       "viatura_id":  243,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  10,
+                       "viatura_id":  247,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  11,
+                       "viatura_id":  250,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  11,
+                       "viatura_id":  253,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Motor",
+                       "om_id":  11,
+                       "viatura_id":  255,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  11,
+                       "viatura_id":  260,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Pneus",
+                       "om_id":  11,
+                       "viatura_id":  262,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   },
+                   {
+                       "categoria_falha":  "Outros",
+                       "om_id":  12,
+                       "viatura_id":  268,
+                       "data_registro":  "2026-07-19T00:01:17.711Z"
+                   }
+                ],
+     "composicao_frota":  {},
+     "version":  1784600000000
+}

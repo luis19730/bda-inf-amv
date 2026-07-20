@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Gerenciar Viaturas — Bda Inf Amv</title>
+  <link rel="stylesheet" href="css/style.css?v=11">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <div class="header-logo"><img src="img/logo.png" alt="Bda Inf Amv"></div>
+      <div class="header-title">
+        <h1>Gerenciamento de Viaturas</h1>
+        <p>Atualização de Status por Organização Militar</p>
+      </div>
+    </div>
+    <div class="header-nav">
+      <a href="index.html" class="nav-btn">Painel de Indicadores</a>
+      <a href="gerenciar.html" class="nav-btn active">Gerenciar Vtr</a>
+    </div>
+    <div class="header-time">
+      <div id="dataAtual"></div>
+      <div class="hora" id="horaAtual"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="indicador-geral" style="flex-direction:column; align-items:stretch;">
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        <div>
+          <label style="font-size:12px;color:var(--text-secondary);display:block;margin-bottom:6px;font-weight:500;">Selecione a Organização Militar</label>
+          <select class="filtro-input" id="omSelect" style="min-width:280px;font-size:14px;padding:12px 16px;">
+            <option value="">-- Selecione a OM --</option>
+            <option value="TOTAL">Total (Todas as OMs)</option>
+          </select>
+        </div>
+        <div id="omStatusResumo" style="display:flex;gap:12px;"></div>
+      </div>
+    </div>
+
+    <div class="indicadores-grid" id="resumoOm" style="display:none;">
+      <div class="indicador-card blue"><div class="label">Total na OM</div><div class="valor" id="resumoTotal">0</div></div>
+      <div class="indicador-card green"><div class="label">Disponíveis</div><div class="valor" id="resumoProntas">0</div></div>
+      <div class="indicador-card" id="resumoIndiceCard"><div class="label">Indice</div><div class="valor" id="resumoIndice">0%</div></div>
+    </div>
+
+    <div class="secao" id="secaoAcoes" style="display:none;">
+      <div class="secao-header">
+        <h2>Acoes da OM</h2>
+        <div class="filtros">
+
+          <input type="text" class="filtro-input" id="buscaVtr" placeholder="Buscar viatura...">
+          <select class="filtro-input" id="filtroStatusLocal">
+            <option value="">Todos os Status</option>
+            <option value="Pronta">Pronta</option>
+            <option value="Manutenção Orgânica">Manutenção Orgânica</option>
+            <option value="Manutenção Externa">Manutenção Externa</option>
+            <option value="Restrição">Restrição</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tabela-vtr">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo de Vtr</th>
+              <th>Total OM</th>
+              <th>Indisponiveis</th>
+              <th>% Disponibilidade</th>
+              <th>Status</th>
+              <th>Gargalo</th>
+              <th>Açoes</th>
+            </tr>
+          </thead>
+          <tbody id="vtrTableBody">
+            <tr><td colspan="7" class="loading">Selecione uma OM para visualizar suas viaturas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Atualização Rapida -->
+  <div class="modal-overlay" id="modalRapido">
+    <div class="modal">
+      <h3>Atualizar Status -- Via Rápida</h3>
+      <input type="hidden" id="rapidVtrId">
+      <div style="background:var(--bg-card);padding:12px 16px;border-radius:8px;margin-bottom:16px;">
+        <span id="rapidVtrInfo" style="font-weight:600;font-size:14px;"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <button class="btn btn-primary" style="background:var(--green);padding:16px;" onclick="atualizarRapido('Pronta')">Pronta</button>
+        <button class="btn" style="background:var(--yellow-bg);color:var(--yellow);padding:16px;border:1px solid var(--yellow);" onclick="atualizarRapido('Manutenção Orgânica')">Mnt Orgânica</button>
+        <button class="btn" style="background:var(--red-bg);color:var(--red);padding:16px;border:1px solid var(--red);" onclick="atualizarRapido('Manutenção Externa')">Mnt Externa</button>
+        <button class="btn" style="background:var(--blue-bg);color:var(--blue);padding:16px;border:1px solid var(--blue);" onclick="atualizarRapido('Restrição')">Restrição</button>
+      </div>
+      <div class="campo"><label>Gargalo (se diferente de Pronta)</label><input type="text" id="rapidGargalo" placeholder="Ex: Aguardando pneu..."></div>
+      <div class="campo"><label>Registrado Por</label><input type="text" id="rapidResponsavel" placeholder="Nome / Posto"></div>
+      <div class="modal-botoes"><button class="btn btn-secondary" onclick="fecharModalRapido()">Fechar</button></div>
+    </div>
+  </div>
+
+  <!-- Modal Histórico -->
+  <div class="modal-overlay" id="modalHistorico">
+    <div class="modal" style="width:600px;">
+      <h3>Histórico de Status</h3>
+      <div style="background:var(--bg-card);padding:12px 16px;border-radius:8px;margin-bottom:16px;">
+        <span id="histVtrInfo" style="font-weight:600;"></span>
+      </div>
+      <div id="histContainer" style="max-height:400px;overflow-y:auto;"></div>
+      <div class="modal-botoes"><button class="btn btn-secondary" onclick="fecharModalHistorico()">Fechar</button></div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal CRUD: Editar -->
+  <div class="modal-overlay" id="modalEditarG">
+    <div class="modal" style="width:520px;">
+      <h3>Editar Viatura</h3>
+      <input type="hidden" id="editarIdG">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="campo"><label>Placa *</label><input type="text" id="editarPlacaG" style="text-transform:uppercase;"></div>
+        <div class="campo"><label>Nº EB</label><input type="text" id="editarEbG"></div>
+        <div class="campo"><label>OM *</label><select id="editarOmG"></select></div>
+        <div class="campo"><label>Tipo *</label>
+          <select id="editarTipoG">
+            <option value="">Selecione o tipo</option>
+            <optgroup label="VTP">
+              <option value="VTP 5 Psg">5 Psg</option>
+              <option value="VTP Picape 5 Psg">Picape 5 Psg</option>
+              <option value="VTP Ônibus">Ônibus</option>
+              <option value="VTP Microônibus">Microônibus</option>
+              <option value="VTP Van 14 a 16 Psg">Van 14 a 16 Psg</option>
+            </optgroup>
+            <optgroup label="VTNE">
+              <option value="VTNE ¾ Ton">¾ Ton</option>
+              <option value="VTNE 5 Ton">5 Ton</option>
+              <option value="VTNE 2 ½ Ton">2 ½ Ton</option>
+            </optgroup>
+            <optgroup label="VTE">
+              <option value="VTE Ambulância">Ambulância</option>
+              <option value="VTE Cisterna Água">Cisterna Água</option>
+              <option value="VTE Cisterna Combustível">Cisterna Combustível</option>
+              <option value="VTE Baú">Baú</option>
+            </optgroup>
+            <optgroup label="VSRNE">
+              <option value="VSRNE Reboque">Reboque</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="campo"><label>Marca/Modelo</label><input type="text" id="editarModeloG"></div>
+        <div class="campo"><label>Capacidade</label><input type="text" id="editarCapG"></div>
+        <div class="campo"><label>Ano Fab.</label><input type="number" id="editarAnoG" min="1990" max="2030"></div>
+        <div class="campo"><label>Km Atual</label><input type="number" id="editarKmG" min="0"></div>
+        <div class="campo" style="grid-column:span 2;"><label>Próxima Revisão (km)</label><input type="number" id="editarProxrevG" min="0"></div>
+      </div>
+      <div class="modal-botoes">
+        <button class="btn btn-secondary" onclick="fecharModalEditarG()">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarEditarG()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal CRUD: Excluir -->
+  <div class="modal-overlay" id="modalExcluirG">
+    <div class="modal" style="width:400px;">
+      <h3>Excluir Viatura</h3>
+      <input type="hidden" id="excluirIdG">
+      <div style="background:var(--red-bg);border:1px solid var(--red);border-radius:8px;padding:16px;margin-bottom:16px;">
+        <p style="font-size:14px;color:var(--red);font-weight:600;">Deseja excluir esta viatura?</p>
+        <p style="font-size:13px;color:var(--text-secondary);margin-top:8px;" id="excluirInfoG"></p>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">A operação e irreversivel.</p>
+      </div>
+      <div class="modal-botoes">
+        <button class="btn btn-secondary" onclick="fecharModalExcluirG()">Cancelar</button>
+        <button class="btn btn-primary" style="background:var(--red);" onclick="confirmarExcluirG()">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/modo-estatico.js?v=11"></script>
+  <script>
+    const API = '/api';
+    function statusClass(s) { if (s === 'Pronta') return 'pronta'; if (s === 'Manutenção Orgânica') return 'mnt-org'; if (s === 'Manutenção Externa') return 'mnt-ext'; return 'restricao'; }
+    function atualizarRelogio() {
+      const a = new Date(); const d = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']; const m = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+      document.getElementById('dataAtual').textContent = d[a.getDay()]+', '+a.getDate()+' '+m[a.getMonth()]+' '+a.getFullYear();
+      document.getElementById('horaAtual').textContent = a.toLocaleTimeString('pt-BR');
+    }
+
+    let omAtual = null;
+    let vtrsOmAtual = [];
+
+    async function carregarOMs() {
+      const res = await fetch(API+'/oms');
+      const oms = await res.json();
+      const sel = document.getElementById('omSelect');
+      sel.innerHTML = '<option value="">-- Selecione a OM --</option>' +
+        oms.map(o => '<option value="'+o.id+'">'+o.sigla+' - '+o.nome_completo+'</option>').join('');
+    }
+
+    document.getElementById('omSelect').addEventListener('change', async function() {
+      if (!this.value) {
+        document.getElementById('resumoOm').style.display = 'none';
+        document.getElementById('secaoAcoes').style.display = 'none';
+        document.getElementById('omStatusResumo').innerHTML = '';
+        return;
+      }
+      omAtual = this.value;
+      await carregarVtrsOm(omAtual);
+    });
+
+    async function carregarVtrsOm(omId) {
+      const isTotal = omId === 'TOTAL';
+      const vtrsRes = await fetch(API + '/viaturas' + (isTotal ? '' : '?om_id=' + omId));
+      const vtrs = await vtrsRes.json();
+      const allStatusRes = await fetch(API + '/oms/status');
+      const allStatus = await allStatusRes.json();
+
+      let omStatus;
+      if (isTotal) {
+        const dashRes = await fetch(API + '/dashboard');
+        const dash = await dashRes.json();
+        omStatus = { total_frota: dash.total_frota, vtr_prontas: dash.vtr_prontas, em_manutencao: dash.em_manutencao_organica + dash.em_manutencao_externa, restricao: dash.restricao, indice_disponibilidade: dash.indice_geral };
+      } else {
+        omStatus = allStatus.find(function(o) { return o.id == omId; });
+      }
+
+      vtrsOmAtual = vtrs;
+
+      if (omStatus) {
+        document.getElementById('resumoOm').style.display = 'grid';
+        document.getElementById('secaoAcoes').style.display = 'block';
+        document.getElementById('resumoTotal').textContent = omStatus.total_frota;
+        document.getElementById('resumoProntas').textContent = omStatus.vtr_prontas;
+        document.getElementById('resumoIndice').textContent = omStatus.indice_disponibilidade + '%';
+        var card = document.getElementById('resumoIndiceCard');
+        if (omStatus.indice_disponibilidade >= 85) card.className = 'indicador-card green';
+        else if (omStatus.indice_disponibilidade >= 70) card.className = 'indicador-card yellow';
+        else card.className = 'indicador-card red';
+      }
+
+      renderizarVtrsOm(vtrs);
+    }
+
+    function renderizarVtrsOm(vtrs) {
+      var tbody = document.getElementById('vtrTableBody');
+      if (!vtrs.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:30px;" class="loading">Nenhuma viatura encontrada.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = vtrs.map(function(v) {
+        var sc = statusClass(v.status);
+        var eb = (v.eb_numero || '').replace(/'/g, "");
+        var ph = v.placa.replace(/'/g, "");
+        var omSg = v.om_sigla.replace(/'/g, "");
+        var totalOm = vtrsOmAtual.length;
+        var indisponiveis = vtrsOmAtual.filter(function(x) { var xs = x.status || ''; return xs === 'Manutenção Orgânica' || xs === 'Manutenção Externa' || xs === 'Restrição'; }).length;
+        var prontas = totalOm - indisponiveis;
+        var pctDisp = totalOm > 0 ? ((prontas / totalOm) * 100).toFixed(1) : 0;
+        return '<tr>' +
+          '<td>'+v.tipo_viatura+'</td>' +
+          '<td>'+totalOm+'</td>' +
+          '<td style="color:var(--red);font-weight:600;">'+indisponiveis+'</td>' +
+          '<td><span class="indice-badge '+(pctDisp >= 85 ? 'verde' : pctDisp >= 70 ? 'amarelo' : 'vermelho')+'">'+pctDisp+'%</span></td>' +
+          '<td><span class="status-cell '+sc+'">'+(v.status || "Sem registro")+'</span></td>' +
+          '<td>'+(v.gargalo || '<span style="color:var(--text-muted);">-</span>')+'</td>' +
+          '<td style="display:flex;gap:2px;flex-wrap:wrap;">' +
+            '<button class="btn btn-primary" style="padding:4px 8px;font-size:10px;background:var(--blue);border-color:var(--blue);" onclick="abrirModalEditarG('+v.id+')">Editar</button>' +
+            '<button class="btn btn-secondary" style="padding:4px 8px;font-size:10px;" onclick="abrirModalRapido('+v.id+',\''+ph+'\',\''+eb+'\')">Status</button>' +
+            '<button class="btn btn-secondary" style="padding:4px 8px;font-size:10px;" onclick="verHistorico('+v.id+',\''+(v.eb_numero||v.placa).replace(/'/g,"")+'\')">Hist</button>' +
+            '<button class="btn" style="padding:4px 8px;font-size:10px;background:var(--red-bg);color:var(--red);border:1px solid var(--red);" onclick="abrirModalExcluirG('+v.id+',\''+(v.eb_numero||v.placa).replace(/'/g,"")+'\',\''+omSg+'\')">Excluir</button>' +
+          '</td></tr>';
+      }).join('');
+    }
+
+    document.getElementById('buscaVtr').addEventListener('input', function() {
+      var q = this.value.toLowerCase();
+      renderizarVtrsOm(vtrsOmAtual.filter(function(v) {
+        return (v.placa && v.placa.toLowerCase().includes(q)) ||
+               (v.eb_numero && v.eb_numero.toLowerCase().includes(q)) ||
+               (v.marca_modelo && v.marca_modelo.toLowerCase().includes(q));
+      }));
+    });
+
+    document.getElementById('filtroStatusLocal').addEventListener('change', function() {
+      if (!this.value) renderizarVtrsOm(vtrsOmAtual);
+      else renderizarVtrsOm(vtrsOmAtual.filter(function(v) { return v.status === this.value; }.bind(this)));
+    });
+
+    function abrirModalRapido(id, placa, eb) {
+      document.getElementById('rapidVtrId').value = id;
+      document.getElementById('rapidVtrInfo').textContent = (eb ? eb + ' - ' : '') + placa;
+      document.getElementById('rapidGargalo').value = '';
+      document.getElementById('modalRapido').classList.add('ativo');
+    }
+    function fecharModalRapido() { document.getElementById('modalRapido').classList.remove('ativo'); }
+    async function atualizarRapido(status) {
+      var id = document.getElementById('rapidVtrId').value;
+      var g = document.getElementById('rapidGargalo').value;
+      var r = document.getElementById('rapidResponsavel').value;
+      if (status !== 'Pronta' && !g) { alert('Para status diferente de Pronta, informe o gargalo.'); return; }
+      try {
+        var res = await fetch(API+'/viaturas/'+id+'/status', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({status:status, gargalo:g, registrado_por:r||'S4/FA'}) });
+        if (res.ok) { fecharModalRapido(); if (omAtual) carregarVtrsOm(omAtual); } else alert('Erro.');
+      } catch(e) { alert('Erro de conexao.'); }
+    }
+
+    async function verHistorico(vtrId, info) {
+      document.getElementById('histVtrInfo').textContent = info;
+      document.getElementById('modalHistorico').classList.add('ativo');
+      try {
+        var res = await fetch(API+'/historico/'+vtrId);
+        var hist = await res.json();
+        var cont = document.getElementById('histContainer');
+        if (!hist.length) { cont.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:20px;">Sem registros.</div>'; return; }
+        cont.innerHTML = hist.map(function(h) {
+          var sc = statusClass(h.status);
+          return '<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">' +
+            '<span class="status-cell '+sc+'" style="min-width:120px;text-align:center;">'+h.status+'</span>' +
+            '<div style="flex:1;"><div style="font-size:12px;color:var(--text-secondary);">'+(h.gargalo || 'Sem gargalo')+'</div></div>' +
+            '<div style="text-align:right;"><div style="font-size:12px;">'+(h.registrado_por || '-')+'</div><div style="font-size:11px;color:var(--text-muted);">'+(h.data_registro ? h.data_registro.substring(0,19) : '')+'</div></div></div>';
+        }).join('');
+      } catch(e) { document.getElementById('histContainer').innerHTML = '<div style="color:var(--red);padding:20px;">Erro ao carregar.</div>'; }
+    }
+    function fecharModalHistorico() { document.getElementById('modalHistorico').classList.remove('ativo'); }
+
+    document.getElementById('modalRapido').addEventListener('click', function(e) { if (e.target===this) fecharModalRapido(); });
+    document.getElementById('modalHistorico').addEventListener('click', function(e) { if (e.target===this) fecharModalHistorico(); });
+
+    async function abrirModalEditarG(vtrId) {
+      var res = await fetch(API+'/oms');
+      var oms = await res.json();
+      var edSel = document.getElementById('editarOmG');
+      edSel.innerHTML = oms.map(function(o) { return '<option value="'+o.id+'">'+o.sigla+'</option>'; }).join('');
+      var v = vtrsOmAtual.find(function(x) { return x.id === vtrId; });
+      if (!v) return alert('Viatura nao encontrada.');
+      document.getElementById('editarIdG').value = v.id;
+      document.getElementById('editarPlacaG').value = v.placa;
+      document.getElementById('editarEbG').value = v.eb_numero || '';
+      document.getElementById('editarOmG').value = v.om_id;
+      document.getElementById('editarTipoG').value = v.tipo_viatura;
+      document.getElementById('editarModeloG').value = v.marca_modelo || '';
+      document.getElementById('editarCapG').value = v.capacidade || '';
+      document.getElementById('editarAnoG').value = v.ano_fabricacao || '';
+      document.getElementById('editarKmG').value = v.quilometragem_atual || 0;
+      document.getElementById('editarProxrevG').value = v.proxima_revisao_km || '';
+      document.getElementById('modalEditarG').classList.add('ativo');
+    }
+    function fecharModalEditarG() { document.getElementById('modalEditarG').classList.remove('ativo'); }
+    async function salvarEditarG() {
+      var vtrId = document.getElementById('editarIdG').value;
+      var d = {
+        placa: document.getElementById('editarPlacaG').value.toUpperCase(),
+        eb_numero: document.getElementById('editarEbG').value,
+        om_id: document.getElementById('editarOmG').value,
+        tipo_viatura: document.getElementById('editarTipoG').value,
+        marca_modelo: document.getElementById('editarModeloG').value,
+        capacidade: document.getElementById('editarCapG').value,
+        ano_fabricacao: document.getElementById('editarAnoG').value,
+        quilometragem_atual: document.getElementById('editarKmG').value,
+        proxima_revisao_km: document.getElementById('editarProxrevG').value
+      };
+      if (!d.placa || !d.om_id || !d.tipo_viatura) { alert('Placa, OM e Tipo sao obrigatorios.'); return; }
+      try {
+        var res = await fetch(API+'/viaturas/'+vtrId, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(d) });
+        var r = await res.json();
+        if (res.ok) { fecharModalEditarG(); if (omAtual) carregarVtrsOm(omAtual); } else alert(r.erro || 'Erro');
+      } catch(e) { alert('Erro de conexao.'); }
+    }
+
+    function abrirModalExcluirG(vtrId, info, om) {
+      document.getElementById('excluirIdG').value = vtrId;
+      document.getElementById('excluirInfoG').textContent = info + ' (' + om + ')';
+      document.getElementById('modalExcluirG').classList.add('ativo');
+    }
+    function fecharModalExcluirG() { document.getElementById('modalExcluirG').classList.remove('ativo'); }
+    async function confirmarExcluirG() {
+      var vtrId = document.getElementById('excluirIdG').value;
+      try {
+        var res = await fetch(API+'/viaturas/'+vtrId, { method:'DELETE' });
+        var r = await res.json();
+        if (res.ok) { fecharModalExcluirG(); if (omAtual) carregarVtrsOm(omAtual); } else alert(r.erro || 'Erro ao excluir');
+      } catch(e) { alert('Erro de conexao.'); }
+    }
+
+
+    ((function(id){var e=document.getElementById(id); if(e) e.addEventListener('click', function(ev){ if(ev.target===this) fecharModalEditarG(); }); })('modalEditarG'));
+    ((function(id){var e=document.getElementById(id); if(e) e.addEventListener('click', function(ev){ if(ev.target===this) fecharModalExcluirG(); }); })('modalExcluirG'));
+
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 1000);
+    carregarOMs();
+  </script>
+</body>
+</html>
