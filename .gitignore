@@ -1,11 +1,1 @@
-# OS
-Thumbs.db
-Desktop.ini
-.DS_Store
-
-# Editor
-.vscode/
-.idea/
-
-# Logs
-*.log
+server.ps1

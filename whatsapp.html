@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>WhatsApp - Lembrete Diário — Bda Inf Amv</title>
+  <link rel="stylesheet" href="css/style.css?v=11">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <div class="header-logo"><img src="img/logo.png" alt="Bda Inf Amv"></div>
+      <div class="header-title">
+        <h1>WhatsApp - Lembrete Diário</h1>
+        <p>Envio automático de missões — Bda Inf Amv</p>
+      </div>
+    </div>
+    <div class="header-nav">
+      <a href="whatsapp.html" class="nav-btn active">WhatsApp</a>
+    </div>
+    <div class="header-time">
+      <div id="dataAtual"></div>
+      <div class="hora" id="horaAtual"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Contatos -->
+    <div class="indicador-alerta" style="background:rgba(34,197,94,0.1);border-color:#22c55e;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;width:100%;">
+        <span style="color:#22c55e;font-size:14px;font-weight:700;">📱 Destinatários:</span>
+        <div id="listaContatos" style="display:flex;flex-wrap:wrap;gap:8px;flex:1;"></div>
+        <button class="btn btn-secondary" id="btnGerenciarContatos" style="font-size:12px;padding:6px 14px;border-color:#22c55e55;color:#22c55e;">+ Contato</button>
+      </div>
+    </div>
+
+    <!-- Modal Contatos -->
+    <div id="modalContatos" class="modal-overlay" style="display:none;">
+      <div class="modal" style="max-width:480px;">
+        <div class="modal-header">
+          <h2>Gerenciar Contatos</h2>
+          <button class="modal-close" onclick="fecharModalContatos()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="contatoForm" style="display:flex;gap:8px;margin-bottom:16px;">
+            <input type="text" id="contatoNome" class="filtro-input" placeholder="Nome" style="flex:1;">
+            <input type="tel" id="contatoTelefone" class="filtro-input" placeholder="Telefone (ex: 5512988843234)" style="flex:1.5;">
+            <button class="btn btn-whatsapp" id="btnSalvarContato" style="font-size:12px;padding:8px 14px;">Salvar</button>
+          </div>
+          <div id="listaContatosModal"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="secao">
+      <div class="secao-header">
+        <h2>Filtros</h2>
+      </div>
+      <div class="filtros-agenda">
+        <div class="filtro-grupo">
+          <label>Período</label>
+          <select id="filtroDias" class="filtro-input">
+            <option value="2">Próximos 2 dias</option>
+            <option value="3">Próximos 3 dias</option>
+            <option value="5">Próximos 5 dias</option>
+            <option value="7" selected>Próximos 7 dias</option>
+            <option value="15">Próximos 15 dias</option>
+            <option value="30">Próximos 30 dias</option>
+          </select>
+        </div>
+        <div class="filtro-grupo">
+          <label>Responsável</label>
+          <select id="filtroResponsavel" class="filtro-input">
+            <option value="">Todos</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ações -->
+    <div class="whatsapp-acoes">
+      <button id="btnEnviar" class="btn btn-whatsapp">
+        <span class="btn-icon">📱</span> Enviar via WhatsApp
+      </button>
+      <button id="btnCopiar" class="btn btn-secondary">
+        <span class="btn-icon">📋</span> Copiar Mensagem
+      </button>
+    </div>
+
+    <!-- Preview das Missões -->
+    <div class="secao">
+      <div class="secao-header">
+        <h2>Preview das Missões de Hoje</h2>
+      </div>
+      <div id="previewContainer" class="preview-container">
+        <div class="loading">Carregando...</div>
+      </div>
+    </div>
+
+    <!-- Mensagem Formatada -->
+    <div class="secao">
+      <div class="secao-header">
+        <h2>Mensagem Formatada</h2>
+      </div>
+      <div class="mensagem-whatsapp">
+        <pre id="mensagemBruta"></pre>
+      </div>
+    </div>
+
+    <!-- Instruções -->
+    <div class="secao">
+      <div class="secao-header">
+        <h2>Como Funciona</h2>
+      </div>
+      <div class="instrucoes-container">
+        <div class="instrucao-item">
+          <div class="instrucao-numero">1</div>
+          <div class="instrucao-texto">
+            <strong>Envio Manual</strong>
+            <p>Clique em "Enviar via WhatsApp" para abrir o WhatsApp com a mensagem pronta. Basta apertar enviar.</p>
+          </div>
+        </div>
+        <div class="instrucao-item">
+          <div class="instrucao-numero">2</div>
+          <div class="instrucao-texto">
+            <strong>Copiar Mensagem</strong>
+            <p>Copie a mensagem e cole no WhatsApp, Telegram ou qualquer outro aplicativo.</p>
+          </div>
+        </div>
+        <div class="instrucao-item">
+          <div class="instrucao-numero">3</div>
+          <div class="instrucao-texto">
+            <strong>Envio Automático</strong>
+            <p>Para envio automático diário, execute o script <code>whatsapp-sender.js</code> com Node.js via Agendador de Tarefas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="missions_data.js"></script>
+  <script src="js/agenda.js"></script>
+  <script src="js/whatsapp.js?v=11"></script>
+</body>
+</html>
