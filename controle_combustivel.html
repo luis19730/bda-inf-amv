@@ -235,17 +235,20 @@
       text-align: center;
       border: 1px solid var(--border);
       font-weight: 500;
+      color: #000;
+      background: rgba(212,160,23,0.15);
     }
     .painel-table td:first-child {
       text-align: left;
       font-weight: 600;
       white-space: nowrap;
     }
-    .painel-table tr:nth-child(even) { background: rgba(0,0,0,0.02); }
-    .painel-table tr.total-row {
+    .painel-table tr:hover td { background: rgba(212,160,23,0.25); }
+    .painel-table tr.total-row td {
       font-weight: 700;
       background: #eef2e6 !important;
       border-top: 2px solid var(--primary);
+      color: #000;
     }
     @media print {
       body { background: #fff !important; }
@@ -262,7 +265,8 @@
       .painel-section h3 { background: #556b2f !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-summary { margin: 0 10px 12px; }
       .painel-table th { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .painel-table tr.total-row { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .painel-table td { background: rgba(212,160,23,0.15) !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .painel-table tr.total-row { background: #eef2e6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-card { border-left-width: 3px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-section.page-break-before { page-break-before: always; }
       .painel-print-btns { display: none !important; }
