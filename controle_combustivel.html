@@ -249,7 +249,8 @@
     }
     @media print {
       body { background: #fff !important; }
-      .tabs, .stats-bar, .pizza-section, .table-container, .btn-print, .header-nav, .last-modified { display: none !important; }
+      .tabs, .stats-bar, .pizza-section, .table-container, .header-nav, .last-modified { display: none !important; }
+      .btn-print { display: none !important; }
       .header, header { background: #fff !important; color: #000 !important; box-shadow: none !important; border-bottom: 2px solid #000 !important; padding: 10px 0 !important; }
       .header h1, header h1 { color: #000 !important; font-size: 1rem; }
       .header h2, header h2 { color: #333 !important; }
@@ -257,12 +258,14 @@
       .header-logo { width: 50px; height: 50px; filter: grayscale(1); }
       .header-date { color: #666 !important; }
       #tab-painel { display: block !important; }
-      .painel-section { margin: 0 10px 12px; box-shadow: none; border: 1px solid #ccc; }
+      .painel-section { margin: 0 10px 12px; box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
       .painel-section h3 { background: #556b2f !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-summary { margin: 0 10px 12px; }
       .painel-table th { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-table tr.total-row { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-card { border-left-width: 3px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .painel-section.page-break-before { page-break-before: always; }
+      .painel-print-btns { display: none !important; }
     }
   </style>
 </head>
@@ -360,8 +363,11 @@
 
   <!-- ==================== PAINEL ==================== -->
   <div class="tab-content" id="tab-painel">
-    <div style="text-align:center;padding:10px 0 0">
-      <button class="btn-print" onclick="window.print()" style="background:var(--primary);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15)">Imprimir Relatório</button>
+    <div class="painel-print-btns" style="display:flex;justify-content:center;gap:8px;padding:14px 0 4px;flex-wrap:wrap">
+      <button onclick="printSection('od')" style="background:var(--primary);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer">Imprimir OD</button>
+      <button onclick="printSection('gc')" style="background:#c0392b;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer">Imprimir GC</button>
+      <button onclick="printSection('falcon')" style="background:#d4a017;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer">Imprimir Falcão</button>
+      <button onclick="printAll()" style="background:#333;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer">Imprimir Tudo</button>
     </div>
     <div id="painel-summary" class="painel-summary"></div>
     <div id="painel-od" class="painel-section"></div>
@@ -803,6 +809,44 @@
         ctx.strokeStyle = 'rgba(0,0,0,0.06)';
         ctx.lineWidth = 1;
         ctx.stroke();
+      });
+    }
+
+    // ==================== PAINEL PRINT ====================
+    function printSection(section) {
+      var sections = ['od', 'gc', 'falcon'];
+      sections.forEach(function(s) {
+        var el = document.getElementById('painel-' + s);
+        if (s === section) {
+          el.style.display = '';
+          el.classList.remove('page-break-before');
+        } else {
+          el.style.display = 'none';
+        }
+      });
+      document.getElementById('painel-summary').style.display = section === 'od' ? '' : 'none';
+      window.print();
+      sections.forEach(function(s) {
+        document.getElementById('painel-' + s).style.display = '';
+      });
+      document.getElementById('painel-summary').style.display = '';
+    }
+
+    function printAll() {
+      var sections = ['od', 'gc', 'falcon'];
+      sections.forEach(function(s, i) {
+        var el = document.getElementById('painel-' + s);
+        el.style.display = '';
+        if (i > 0) {
+          el.classList.add('page-break-before');
+        } else {
+          el.classList.remove('page-break-before');
+        }
+      });
+      document.getElementById('painel-summary').style.display = '';
+      window.print();
+      sections.forEach(function(s) {
+        document.getElementById('painel-' + s).classList.remove('page-break-before');
       });
     }
 
