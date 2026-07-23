@@ -178,6 +178,92 @@
       border-color: var(--primary);
       box-shadow: 0 0 0 2px rgba(85,107,47,0.2);
     }
+    .painel-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 16px 28px 20px;
+    }
+    .painel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .painel-card .pc-val { font-size: 1.1rem; font-weight: 800; color: var(--text); font-family: 'IBM Plex Mono', monospace; }
+    .painel-card .pc-lbl { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .painel-card.warn { border-left-color: var(--warning); }
+    .painel-card.danger { border-left-color: var(--danger); }
+    .painel-card.ok { border-left-color: var(--success); }
+    .painel-section {
+      margin: 0 28px 20px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .painel-section h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 8px 12px;
+      background: var(--primary);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .painel-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .painel-table th {
+      background: #eef2e6;
+      padding: 5px 6px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.68rem;
+      border: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+    .painel-table td {
+      padding: 4px 6px;
+      text-align: center;
+      border: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .painel-table td:first-child {
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .painel-table tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+    .painel-table tr.total-row {
+      font-weight: 700;
+      background: #eef2e6 !important;
+      border-top: 2px solid var(--primary);
+    }
+    @media print {
+      body { background: #fff !important; }
+      .tabs, .stats-bar, .pizza-section, .table-container, .btn-print, .header-nav, .last-modified { display: none !important; }
+      .header, header { background: #fff !important; color: #000 !important; box-shadow: none !important; border-bottom: 2px solid #000 !important; padding: 10px 0 !important; }
+      .header h1, header h1 { color: #000 !important; font-size: 1rem; }
+      .header h2, header h2 { color: #333 !important; }
+      .header-content { justify-content: center; }
+      .header-logo { width: 50px; height: 50px; filter: grayscale(1); }
+      .header-date { color: #666 !important; }
+      #tab-painel { display: block !important; }
+      .painel-section { margin: 0 10px 12px; box-shadow: none; border: 1px solid #ccc; }
+      .painel-section h3 { background: #556b2f !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .painel-summary { margin: 0 10px 12px; }
+      .painel-table th { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .painel-table tr.total-row { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .painel-card { border-left-width: 3px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
@@ -193,15 +279,11 @@
     <div class="last-modified" id="lastModified">Última alteração: —</div>
   </header>
 
-  <div style="display:flex;justify-content:center;gap:10px;padding:8px 0 0">
-    <a href="controle_combustivel.html" style="text-decoration:none;color:#fff;background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:6px;font-size:0.8rem;font-weight:600">Combustível</a>
-    <a href="painel.html" style="text-decoration:none;color:rgba(255,255,255,0.7);padding:6px 14px;border-radius:6px;font-size:0.8rem;font-weight:500">Painel</a>
-  </div>
-
   <div class="tabs">
     <button class="tab active" data-tab="od" onclick="switchTab('od')">Óleo Diesel (OD)</button>
     <button class="tab" data-tab="gc" onclick="switchTab('gc')">Gasolina Comum (GC)</button>
     <button class="tab" data-tab="falcon" onclick="switchTab('falcon')">Cota Falcão Selva</button>
+    <button class="tab" data-tab="painel" onclick="switchTab('painel')">Painel</button>
   </div>
 
   <!-- ==================== OD ==================== -->
@@ -274,6 +356,17 @@
         <tbody id="falcon-body"></tbody>
       </table>
     </div>
+  </div>
+
+  <!-- ==================== PAINEL ==================== -->
+  <div class="tab-content" id="tab-painel">
+    <div style="text-align:center;padding:10px 0 0">
+      <button class="btn-print" onclick="window.print()" style="background:var(--primary);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15)">Imprimir Relatório</button>
+    </div>
+    <div id="painel-summary" class="painel-summary"></div>
+    <div id="painel-od" class="painel-section"></div>
+    <div id="painel-gc" class="painel-section"></div>
+    <div id="painel-falcon" class="painel-section"></div>
   </div>
 
   <script>
@@ -713,6 +806,61 @@
       });
     }
 
+    // ==================== PAINEL ====================
+    function renderPainel() {
+      var odTotCota = 0, odTotCons = 0, odTotSaldo = 0;
+      var gcTotCota = 0, gcTotCons = 0, gcTotSaldo = 0;
+      var falTotOD = 0, falTotGC = 0;
+
+      OD_DATA.forEach(function(r) {
+        odTotCota += r.cota; odTotCons += r.consumo; odTotSaldo += (r.cota - r.consumo);
+      });
+      GC_DATA.forEach(function(r) {
+        gcTotCota += r.cota; gcTotCons += r.consumo; gcTotSaldo += (r.cota - r.consumo);
+      });
+      FALCON_DATA.forEach(function(r) {
+        falTotOD += r.od; falTotGC += r.gc;
+      });
+
+      var odPct = odTotCota > 0 ? (odTotSaldo / odTotCota * 100) : 0;
+      var gcPct = gcTotCota > 0 ? (gcTotSaldo / gcTotCota * 100) : 0;
+
+      document.getElementById('painel-summary').innerHTML =
+        '<div class="painel-card ok"><div class="pc-val">' + fmt(odTotCota) + '</div><div class="pc-lbl">Cota Total OD</div></div>' +
+        '<div class="painel-card ok"><div class="pc-val">' + fmt(gcTotCota) + '</div><div class="pc-lbl">Cota Total GC</div></div>' +
+        '<div class="painel-card warn"><div class="pc-val">' + fmt(odTotSaldo) + '</div><div class="pc-lbl">Saldo OD (' + odPct.toFixed(1) + '%)</div></div>' +
+        '<div class="painel-card warn"><div class="pc-val">' + fmt(gcTotSaldo) + '</div><div class="pc-lbl">Saldo GC (' + gcPct.toFixed(1) + '%)</div></div>' +
+        '<div class="painel-card danger"><div class="pc-val">' + fmt(falTotOD + falTotGC) + '</div><div class="pc-lbl">Cota Falcão Total</div></div>';
+
+      var h = '<h3>Óleo Diesel (OD)</h3><table class="painel-table"><thead><tr><th>OM</th><th>Cota Distr</th><th>Consumo OD</th><th>Saldo</th><th>% Saldo</th><th>Distr 3º Trim</th><th>FT Jacaré</th><th>IIQ</th><th>Rem 1</th><th>Rem 2</th></tr></thead><tbody>';
+      OD_DATA.forEach(function(r) {
+        var saldo = r.cota - r.consumo;
+        var pct = r.cota > 0 ? (saldo / r.cota * 100) : 0;
+        h += '<tr><td>' + r.unidade + '</td><td>' + fmt(r.cota) + '</td><td>' + fmt(r.consumo) + '</td><td class="' + pctClass(pct) + '">' + fmt(saldo) + '</td><td class="' + pctClass(pct) + '">' + pct.toFixed(1) + '%</td><td>' + fmt(r.distr3) + '</td><td>' + fmt(r.jacare) + '</td><td>' + fmt(r.iiq) + '</td><td>' + fmt(r.rem1) + '</td><td>' + fmt(r.rem2) + '</td></tr>';
+      });
+      var odTPct = odTotCota > 0 ? (odTotSaldo / odTotCota * 100) : 0;
+      h += '<tr class="total-row"><td>Total</td><td>' + fmt(odTotCota) + '</td><td>' + fmt(odTotCons) + '</td><td class="' + pctClass(odTPct) + '">' + fmt(odTotSaldo) + '</td><td class="' + pctClass(odTPct) + '">' + odTPct.toFixed(1) + '%</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr></tbody></table>';
+      document.getElementById('painel-od').innerHTML = h;
+
+      h = '<h3>Gasolina Comum (GC)</h3><table class="painel-table"><thead><tr><th>OM</th><th>Cota Distr</th><th>Consumo GC</th><th>Saldo</th><th>% Saldo</th><th>Distr 3º Trim</th><th>FT Jacaré</th><th>IIQ</th></tr></thead><tbody>';
+      GC_DATA.forEach(function(r) {
+        var saldo = r.cota - r.consumo;
+        var pct = r.cota > 0 ? (saldo / r.cota * 100) : 0;
+        h += '<tr><td>' + r.unidade + '</td><td>' + fmt(r.cota) + '</td><td>' + fmt(r.consumo) + '</td><td class="' + pctClass(pct > 100 ? 100 : pct) + '">' + fmt(saldo) + '</td><td class="' + pctClass(pct > 100 ? 100 : pct) + '">' + pct.toFixed(1) + '%</td><td>' + fmt(r.distr3) + '</td><td>' + fmt(r.jacare) + '</td><td>' + fmt(r.iiq) + '</td></tr>';
+      });
+      var gcTPct = gcTotCota > 0 ? (gcTotSaldo / gcTotCota * 100) : 0;
+      h += '<tr class="total-row"><td>Total</td><td>' + fmt(gcTotCota) + '</td><td>' + fmt(gcTotCons) + '</td><td class="' + pctClass(gcTPct > 100 ? 100 : gcTPct) + '">' + fmt(gcTotSaldo) + '</td><td class="' + pctClass(gcTPct > 100 ? 100 : gcTPct) + '">' + gcTPct.toFixed(1) + '%</td><td>-</td><td>-</td><td>-</td></tr></tbody></table>';
+      document.getElementById('painel-gc').innerHTML = h;
+
+      h = '<h3>Cota Falcão Selva</h3><table class="painel-table"><thead><tr><th>OM</th><th>Cota OD</th><th>Cota GC</th><th>Total</th></tr></thead><tbody>';
+      FALCON_DATA.forEach(function(r) {
+        var total = r.od + r.gc;
+        h += '<tr><td>' + r.unidade + '</td><td>' + (r.od ? fmt(r.od) : '<span style="color:#999">-</span>') + '</td><td>' + (r.gc ? fmt(r.gc) : '<span style="color:#999">-</span>') + '</td><td><strong>' + fmt(total) + '</strong></td></tr>';
+      });
+      h += '<tr class="total-row"><td>Total</td><td>' + fmt(falTotOD) + '</td><td>' + fmt(falTotGC) + '</td><td>' + fmt(falTotOD + falTotGC) + '</td></tr></tbody></table>';
+      document.getElementById('painel-falcon').innerHTML = h;
+    }
+
     // ==================== TAB SWITCH ====================
     function switchTab(tab) {
       document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
@@ -732,6 +880,7 @@
     renderOD();
     renderGC();
     renderFalcon();
+    renderPainel();
     atualizarRelogio();
     setInterval(atualizarRelogio, 1000);
   </script>
