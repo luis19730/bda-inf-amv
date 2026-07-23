@@ -235,13 +235,18 @@
       text-align: center;
       border: 1px solid var(--border);
       font-weight: 500;
-      color: #000 !important;
       background: rgba(212,160,23,0.15);
     }
     .painel-table td:first-child {
       text-align: left;
       font-weight: 600;
       white-space: nowrap;
+    }
+    .painel-table td,
+    .painel-table td.neg,
+    .painel-table td.pos,
+    .painel-table td.mid {
+      color: #000 !important;
     }
     .painel-table tr:hover td { background: rgba(212,160,23,0.25); }
     .painel-table tr.total-row td {
@@ -265,7 +270,10 @@
       .painel-section h3 { background: #556b2f !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-summary { margin: 0 10px 12px; }
       .painel-table th { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .painel-table td { background: rgba(212,160,23,0.15) !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .painel-table td,
+      .painel-table td.neg,
+      .painel-table td.pos,
+      .painel-table td.mid { background: rgba(212,160,23,0.15) !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-table tr.total-row { background: #eef2e6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-card { border-left-width: 3px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .painel-section.page-break-before { page-break-before: always; }
