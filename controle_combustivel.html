@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Controle Gerencial de Combustível — Bda Inf Amv</title>
+  <link rel="stylesheet" href="style.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .fuel-input {
+      width: 70px;
+      padding: 4px 6px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-align: center;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .fuel-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(85,107,47,0.15);
+    }
+    .fuel-input[readonly] {
+      background: var(--surface);
+      border-color: transparent;
+      cursor: default;
+      font-weight: 700;
+    }
+    td.num { text-align: center; }
+    th.num { text-align: center; }
+    td.neg { color: var(--danger); font-weight: 700; }
+    td.pos { color: var(--success); font-weight: 700; }
+    td.mid { color: var(--warning); font-weight: 700; }
+    td.zero { color: var(--text-muted); }
+    tr.total-row td { font-weight: 700; background: #eef2e6; border-top: 2px solid var(--border); }
+    .pct-bar { display: inline-flex; align-items: center; gap: 6px; }
+    .pct-bar .bar-track { width: 50px; height: 5px; background: rgba(0,0,0,0.1); border-radius: 3px; overflow: hidden; }
+    .pct-bar .bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+    .pizza-section {
+      margin: 0 28px 24px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+    .pizza-section h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .pizza-section h3::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .om-pizza-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 14px;
+    }
+    .om-pizza-card {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 14px 10px 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .om-pizza-card:hover {
+      box-shadow: 0 4px 16px rgba(85,107,47,0.18);
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+    .om-pizza-card .om-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      line-height: 1.25;
+      min-height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .om-pizza-card canvas {
+      border-radius: 50%;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+    }
+    .om-pizza-card .om-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      width: 100%;
+      font-size: 0.68rem;
+    }
+    .om-pizza-card .om-legend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      padding: 1px 0;
+    }
+    .om-pizza-card .om-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    }
+    .om-pizza-card .om-legend-label {
+      flex: 1;
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .om-pizza-card .om-legend-val {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.72rem;
+    }
+    @media (max-width: 768px) {
+      .om-pizza-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+    }
+    .last-modified {
+      width: 100%;
+      text-align: right;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+      padding: 2px 28px 6px;
+      letter-spacing: 0.3px;
+    }
+    .trim-edit {
+      display: inline-block;
+      min-width: 14px;
+      padding: 1px 4px;
+      border: 1px dashed rgba(255,255,255,0.4);
+      border-radius: 4px;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      transition: all 0.2s;
+      cursor: text;
+    }
+    .trim-edit:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.7);
+    }
+    .trim-edit:focus {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(85,107,47,0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <img src="LOGO-BDA-AMV-site.png" alt="Logo BDA Inf Amv" class="header-logo">
+      <div class="header-text">
+        <h1>Controle Gerencial de Combustível</h1>
+        <h2>E4/Bda Inf Amv</h2>
+      </div>
+      <div class="header-date" id="currentDate"></div>
+    </div>
+    <div class="last-modified" id="lastModified">Última alteração: —</div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="od" onclick="switchTab('od')">Óleo Diesel (OD)</button>
+    <button class="tab" data-tab="gc" onclick="switchTab('gc')">Gasolina Comum (GC)</button>
+    <button class="tab" data-tab="falcon" onclick="switchTab('falcon')">Cota Falcão Selva</button>
+  </div>
+
+  <!-- ==================== OD ==================== -->
+  <div class="tab-content active" id="tab-od">
+    <div class="stats-bar" id="od-stats"></div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>OM</th>
+            <th class="num">Cota Distr</th>
+            <th class="num">Consumo OD</th>
+            <th class="num">Saldo</th>
+            <th class="num">% Saldo</th>
+            <th class="num">Distr Cota <span class="trim-edit" id="od-trim-label" contenteditable="true" onblur="updateTrimLabel('od')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}">3</span>º Trim</th>
+            <th class="num">Cota FT Jacaré</th>
+            <th class="num">Cota IIQ</th>
+            <th class="num">Remanej 1</th>
+            <th class="num">Remanej 2</th>
+          </tr>
+        </thead>
+        <tbody id="od-body"></tbody>
+      </table>
+    </div>
+    <div class="pizza-section">
+      <h3>Saldo por OM — Óleo Diesel</h3>
+      <div class="om-pizza-grid" id="pizzaOD-grid"></div>
+    </div>
+  </div>
+
+  <!-- ==================== GC ==================== -->
+  <div class="tab-content" id="tab-gc">
+    <div class="stats-bar" id="gc-stats"></div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>OM</th>
+            <th class="num">Cota Distr</th>
+            <th class="num">Consumo GC</th>
+            <th class="num">Saldo</th>
+            <th class="num">% Saldo</th>
+            <th class="num">Distr Cota <span class="trim-edit" id="gc-trim-label" contenteditable="true" onblur="updateTrimLabel('gc')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}">3</span>º Trim</th>
+            <th class="num">Cota FT Jacaré</th>
+            <th class="num">Cota IIQ</th>
+          </tr>
+        </thead>
+        <tbody id="gc-body"></tbody>
+      </table>
+    </div>
+    <div class="pizza-section">
+      <h3>Saldo por OM — Gasolina Comum</h3>
+      <div class="om-pizza-grid" id="pizzaGC-grid"></div>
+    </div>
+  </div>
+
+  <!-- ==================== FALCÃO SELVA ==================== -->
+  <div class="tab-content" id="tab-falcon">
+    <div class="stats-bar" id="falcon-stats"></div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>OM</th>
+            <th class="num">Cota OD</th>
+            <th class="num">Cota GC</th>
+            <th class="num">Total</th>
+          </tr>
+        </thead>
+        <tbody id="falcon-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // ==================== COLORS ====================
+    var COLORS = [
+      '#556b2f','#6b8e23','#8b7355','#d4a017','#c0392b',
+      '#3b82f6','#a855f7','#22c55e','#f97316','#06b6d4',
+      '#84cc16','#e11d48','#6366f1'
+    ];
+
+    // ==================== DATA ====================
+    var OD_DATA = [
+      { unidade: "Cmdo Bda Inf Amv", cota: 2390, consumo: 67, distr3: 3528, jacare: 0, iiq: 0, rem1: -688, rem2: -734 },
+      { unidade: "Cia C Bda Inf Amv", cota: 1665, consumo: 118, distr3: 1100, jacare: 414, iiq: 23, rem1: 0, rem2: 0 },
+      { unidade: "2º BI Amv", cota: 1444, consumo: 294, distr3: 850, jacare: 0, iiq: 0, rem1: 0, rem2: 0 },
+      { unidade: "5º BI Amv", cota: 2232, consumo: 1967, distr3: 800, jacare: 495, iiq: 687, rem1: 0, rem2: 0 },
+      { unidade: "6º BI Amv", cota: 1266, consumo: 171, distr3: 900, jacare: 253, iiq: 52, rem1: 0, rem2: 0 },
+      { unidade: "5ª Bia AAAe Amv", cota: 651, consumo: 193, distr3: 300, jacare: 0, iiq: 243, rem1: 0, rem2: 0 },
+      { unidade: "20º GAC Amv", cota: 2079, consumo: 810, distr3: 1400, jacare: 0, iiq: 27, rem1: 0, rem2: 0 },
+      { unidade: "12ª Cia Com Amv", cota: 475, consumo: 23, distr3: 400, jacare: 0, iiq: 0, rem1: 0, rem2: 0 },
+      { unidade: "12ª Cia E Cmb Amv", cota: 2420, consumo: 845, distr3: 600, jacare: 7, iiq: 0, rem1: 688, rem2: 734 },
+      { unidade: "12º Pel PE", cota: 315, consumo: 0, distr3: 100, jacare: 0, iiq: 0, rem1: 0, rem2: 0 },
+      { unidade: "22º B Log Amv", cota: 1135, consumo: 326, distr3: 1000, jacare: 0, iiq: 0, rem1: 0, rem2: 0 },
+      { unidade: "1º Esqd C Amv", cota: 1364, consumo: 658, distr3: 632, jacare: 7, iiq: 395, rem1: 0, rem2: 0 },
+      { unidade: "2ª Cia Prec", cota: 176, consumo: 60, distr3: 150, jacare: 0, iiq: 0, rem1: 0, rem2: 0 }
+    ];
+
+    var GC_DATA = [
+      { unidade: "Cmdo Bda Inf Amv", cota: 2064, consumo: -400, distr3: 1960, jacare: 0, iiq: 0 },
+      { unidade: "Cia C Bda Inf Amv", cota: 758, consumo: 625, distr3: 577, jacare: 0, iiq: 101 },
+      { unidade: "2º BI Amv", cota: 793, consumo: -243, distr3: 400, jacare: 0, iiq: 257 },
+      { unidade: "5º BI Amv", cota: 1162, consumo: 163, distr3: 350, jacare: 0, iiq: 0 },
+      { unidade: "6º BI Amv", cota: 1088, consumo: 353, distr3: 400, jacare: 100, iiq: 159 },
+      { unidade: "5ª Bia AAAe Amv", cota: 780, consumo: 315, distr3: 250, jacare: 0, iiq: 168 },
+      { unidade: "20º GAC Amv", cota: 1203, consumo: 490, distr3: 400, jacare: 0, iiq: 335 },
+      { unidade: "12ª Cia Com Amv", cota: 452, consumo: 108, distr3: 250, jacare: 0, iiq: 75 },
+      { unidade: "12ª Cia E Cmb Amv", cota: 846, consumo: 178, distr3: 250, jacare: 2, iiq: 163 },
+      { unidade: "12º Pel PE", cota: 791, consumo: 67, distr3: 400, jacare: 0, iiq: 0 },
+      { unidade: "22º B Log Amv", cota: 1375, consumo: 423, distr3: 400, jacare: 0, iiq: 335 },
+      { unidade: "1º Esqd C Amv", cota: 1058, consumo: 264, distr3: 600, jacare: 0, iiq: 168 },
+      { unidade: "2ª Cia Prec", cota: 330, consumo: 10, distr3: 300, jacare: 0, iiq: 0 }
+    ];
+
+    var FALCON_DATA = [
+      { unidade: "Cmdo Bda Inf Amv", od: 66, gc: 0 },
+      { unidade: "Cia C Bda Inf Amv", od: 0, gc: 0 },
+      { unidade: "2º BI Amv", od: 180, gc: 0 },
+      { unidade: "5º BI Amv", od: 244, gc: 0 },
+      { unidade: "6º BI Amv", od: 0, gc: 450 },
+      { unidade: "5ª Bia AAAe Amv", od: 0, gc: 0 },
+      { unidade: "20º GAC Amv", od: 0, gc: 0 },
+      { unidade: "12ª Cia Com Amv", od: 0, gc: 0 },
+      { unidade: "12ª Cia E Cmb Amv", od: 0, gc: 0 },
+      { unidade: "12º Pel PE", od: 0, gc: 0 },
+      { unidade: "22º B Log Amv", od: 0, gc: 0 },
+      { unidade: "1º Esqd C Amv", od: 0, gc: 0 },
+      { unidade: "2ª Cia Prec", od: 0, gc: 0 }
+    ];
+
+    // ==================== HELPERS ====================
+    function fmt(n) {
+      if (n === null || n === undefined || isNaN(n)) return '-';
+      return n.toLocaleString('pt-BR');
+    }
+
+    function registrarAlteracao() {
+      var agora = new Date();
+      var meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      var d = agora.getDate() + ' ' + meses[agora.getMonth()] + '. ' + agora.getFullYear();
+      var h = agora.toLocaleTimeString('pt-BR');
+      document.getElementById('lastModified').textContent = 'Última alteração: ' + d + ' às ' + h;
+    }
+
+    function updateTrimLabel(prefix) {
+      var el = document.getElementById(prefix + '-trim-label');
+      var val = el.textContent.trim();
+      if (!/^[1-4]$/.test(val)) {
+        el.textContent = '3';
+      }
+      registrarAlteracao();
+    }
+
+    function pctColor(v) {
+      if (v >= 80) return 'var(--success)';
+      if (v >= 50) return 'var(--warning)';
+      return 'var(--danger)';
+    }
+
+    function pctClass(v) {
+      if (v >= 80) return 'pos';
+      if (v >= 50) return 'mid';
+      return 'neg';
+    }
+
+    function barPct(v) { return Math.min(Math.max(v, 0), 100); }
+
+    // ==================== RENDER OD ====================
+    function renderOD() {
+      var tbody = document.getElementById('od-body');
+      var html = '';
+      var totalCota = 0, totalConsumo = 0, totalSaldo = 0;
+      var totalD3 = 0, totalJac = 0, totalIIQ = 0;
+
+      OD_DATA.forEach(function(r, i) {
+        var saldo = r.cota - r.consumo;
+        var pct = r.cota > 0 ? (saldo / r.cota * 100) : 0;
+        totalCota += r.cota; totalConsumo += r.consumo; totalSaldo += saldo;
+        totalD3 += r.distr3; totalJac += r.jacare; totalIIQ += r.iiq;
+
+        html += '<tr>' +
+          '<td>' + r.unidade + '</td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.cota + '" data-od="' + i + '" data-field="cota" onchange="calcOD()" oninput="calcOD()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.consumo + '" data-od="' + i + '" data-field="consumo" onchange="calcOD()" oninput="calcOD()"></td>' +
+          '<td class="num ' + pctClass(pct) + '" id="od-saldo-' + i + '">' + fmt(saldo) + '</td>' +
+          '<td class="num" id="od-pct-' + i + '"><span class="pct-bar"><span style="font-weight:600;color:' + pctColor(pct) + '">' + pct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(pct) + '%;background:' + pctColor(pct) + '"></span></span></span></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.distr3 + '" data-od="' + i + '" data-field="distr3" onchange="calcOD()" oninput="calcOD()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.jacare + '" data-od="' + i + '" data-field="jacare" onchange="calcOD()" oninput="calcOD()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.iiq + '" data-od="' + i + '" data-field="iiq" onchange="calcOD()" oninput="calcOD()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.rem1 + '" data-od="' + i + '" data-field="rem1" onchange="calcOD()" oninput="calcOD()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.rem2 + '" data-od="' + i + '" data-field="rem2" onchange="calcOD()" oninput="calcOD()"></td>' +
+        '</tr>';
+      });
+
+      var tPct = totalCota > 0 ? (totalSaldo / totalCota * 100) : 0;
+      html += '<tr class="total-row">' +
+        '<td>Total</td>' +
+        '<td class="num">' + fmt(totalCota) + '</td>' +
+        '<td class="num">' + fmt(totalConsumo) + '</td>' +
+        '<td class="num ' + pctClass(tPct) + '" id="od-total-saldo">' + fmt(totalSaldo) + '</td>' +
+        '<td class="num" id="od-total-pct"><span class="pct-bar"><span style="font-weight:700;color:' + pctColor(tPct) + '">' + tPct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(tPct) + '%;background:' + pctColor(tPct) + '"></span></span></span></td>' +
+        '<td class="num">' + fmt(totalD3) + '</td>' +
+        '<td class="num">' + fmt(totalJac) + '</td>' +
+        '<td class="num">' + fmt(totalIIQ) + '</td>' +
+        '<td class="num">-</td>' +
+        '<td class="num">-</td>' +
+      '</tr>';
+      tbody.innerHTML = html;
+
+      document.getElementById('od-stats').innerHTML =
+        '<div class="stat-card"><span class="stat-number">' + fmt(totalCota) + '</span><span class="stat-label">Cota Total</span></div>' +
+        '<div class="stat-card follow"><span class="stat-number">' + fmt(totalConsumo) + '</span><span class="stat-label">Consumo</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + fmt(totalSaldo) + '</span><span class="stat-label">Saldo Geral</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + tPct.toFixed(1) + '%</span><span class="stat-label">% Saldo</span></div>' +
+        '<div class="stat-card deadline"><span class="stat-number">' + fmt(totalD3) + '</span><span class="stat-label">Cota 3º Trim</span></div>' +
+        '<div class="stat-card overdue"><span class="stat-number">' + fmt(totalJac) + '</span><span class="stat-label">FT Jacaré</span></div>';
+
+      desenharPizzaOMs('pizzaOD-grid', OD_DATA.map(function(r) {
+        return { nome: r.unidade, cota: r.cota, consumo: r.consumo };
+      }));
+    }
+
+    function calcOD() {
+      var inputs = document.querySelectorAll('[data-od]');
+      inputs.forEach(function(el) {
+        var idx = parseInt(el.getAttribute('data-od'));
+        var field = el.getAttribute('data-field');
+        OD_DATA[idx][field] = parseFloat(el.value) || 0;
+      });
+      var totalCota = 0, totalConsumo = 0, totalSaldo = 0;
+      var totalD3 = 0, totalJac = 0, totalIIQ = 0;
+
+      OD_DATA.forEach(function(r, i) {
+        var saldo = r.cota - r.consumo;
+        var pct = r.cota > 0 ? (saldo / r.cota * 100) : 0;
+        totalCota += r.cota; totalConsumo += r.consumo; totalSaldo += saldo;
+        totalD3 += r.distr3; totalJac += r.jacare; totalIIQ += r.iiq;
+
+        var saldoEl = document.getElementById('od-saldo-' + i);
+        var pctEl = document.getElementById('od-pct-' + i);
+        if (saldoEl) { saldoEl.textContent = fmt(saldo); saldoEl.className = 'num ' + pctClass(pct); }
+        if (pctEl) { pctEl.innerHTML = '<span class="pct-bar"><span style="font-weight:600;color:' + pctColor(pct) + '">' + pct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(pct) + '%;background:' + pctColor(pct) + '"></span></span></span>'; }
+      });
+
+      var tPct = totalCota > 0 ? (totalSaldo / totalCota * 100) : 0;
+      var tsEl = document.getElementById('od-total-saldo');
+      var tpEl = document.getElementById('od-total-pct');
+      if (tsEl) { tsEl.textContent = fmt(totalSaldo); tsEl.className = 'num ' + pctClass(tPct); }
+      if (tpEl) { tpEl.innerHTML = '<span class="pct-bar"><span style="font-weight:700;color:' + pctColor(tPct) + '">' + tPct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(tPct) + '%;background:' + pctColor(tPct) + '"></span></span></span>'; }
+
+      document.getElementById('od-stats').innerHTML =
+        '<div class="stat-card"><span class="stat-number">' + fmt(totalCota) + '</span><span class="stat-label">Cota Total</span></div>' +
+        '<div class="stat-card follow"><span class="stat-number">' + fmt(totalConsumo) + '</span><span class="stat-label">Consumo</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + fmt(totalSaldo) + '</span><span class="stat-label">Saldo Geral</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + tPct.toFixed(1) + '%</span><span class="stat-label">% Saldo</span></div>' +
+        '<div class="stat-card deadline"><span class="stat-number">' + fmt(totalD3) + '</span><span class="stat-label">Cota 3º Trim</span></div>' +
+        '<div class="stat-card overdue"><span class="stat-number">' + fmt(totalJac) + '</span><span class="stat-label">FT Jacaré</span></div>';
+
+      desenharPizzaOMs('pizzaOD-grid', OD_DATA.map(function(r) {
+        return { nome: r.unidade, cota: r.cota, consumo: r.consumo };
+      }));
+      registrarAlteracao();
+    }
+
+    // ==================== RENDER GC ====================
+    function renderGC() {
+      var tbody = document.getElementById('gc-body');
+      var html = '';
+      var totalCota = 0, totalConsumo = 0, totalSaldo = 0;
+      var totalD3 = 0, totalJac = 0, totalIIQ = 0;
+
+      GC_DATA.forEach(function(r, i) {
+        var saldo = r.cota - r.consumo;
+        var pct = r.cota > 0 ? (saldo / r.cota * 100) : 0;
+        var saldoClass = pct > 100 ? 'pos' : pctClass(pct);
+        totalCota += r.cota; totalConsumo += r.consumo; totalSaldo += saldo;
+        totalD3 += r.distr3; totalJac += r.jacare; totalIIQ += r.iiq;
+
+        html += '<tr>' +
+          '<td>' + r.unidade + '</td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.cota + '" data-gc="' + i + '" data-field="cota" onchange="calcGC()" oninput="calcGC()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.consumo + '" data-gc="' + i + '" data-field="consumo" onchange="calcGC()" oninput="calcGC()"></td>' +
+          '<td class="num ' + saldoClass + '" id="gc-saldo-' + i + '">' + fmt(saldo) + '</td>' +
+          '<td class="num" id="gc-pct-' + i + '"><span class="pct-bar"><span style="font-weight:600;color:' + pctColor(pct > 100 ? 100 : pct) + '">' + pct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(pct) + '%;background:' + pctColor(pct > 100 ? 100 : pct) + '"></span></span></span></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.distr3 + '" data-gc="' + i + '" data-field="distr3" onchange="calcGC()" oninput="calcGC()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.jacare + '" data-gc="' + i + '" data-field="jacare" onchange="calcGC()" oninput="calcGC()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.iiq + '" data-gc="' + i + '" data-field="iiq" onchange="calcGC()" oninput="calcGC()"></td>' +
+        '</tr>';
+      });
+
+      var tPct = totalCota > 0 ? (totalSaldo / totalCota * 100) : 0;
+      html += '<tr class="total-row">' +
+        '<td>Total</td>' +
+        '<td class="num">' + fmt(totalCota) + '</td>' +
+        '<td class="num">' + fmt(totalConsumo) + '</td>' +
+        '<td class="num ' + pctClass(tPct) + '" id="gc-total-saldo">' + fmt(totalSaldo) + '</td>' +
+        '<td class="num" id="gc-total-pct"><span class="pct-bar"><span style="font-weight:700;color:' + pctColor(tPct) + '">' + tPct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(tPct) + '%;background:' + pctColor(tPct) + '"></span></span></span></td>' +
+        '<td class="num">' + fmt(totalD3) + '</td>' +
+        '<td class="num">' + fmt(totalJac) + '</td>' +
+        '<td class="num">' + fmt(totalIIQ) + '</td>' +
+      '</tr>';
+      tbody.innerHTML = html;
+
+      document.getElementById('gc-stats').innerHTML =
+        '<div class="stat-card"><span class="stat-number">' + fmt(totalCota) + '</span><span class="stat-label">Cota Total</span></div>' +
+        '<div class="stat-card follow"><span class="stat-number">' + fmt(totalConsumo) + '</span><span class="stat-label">Consumo</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + fmt(totalSaldo) + '</span><span class="stat-label">Saldo Geral</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + tPct.toFixed(1) + '%</span><span class="stat-label">% Saldo</span></div>' +
+        '<div class="stat-card deadline"><span class="stat-number">' + fmt(totalD3) + '</span><span class="stat-label">Cota 3º Trim</span></div>' +
+        '<div class="stat-card overdue"><span class="stat-number">' + fmt(totalJac) + '</span><span class="stat-label">FT Jacaré</span></div>';
+
+      desenharPizzaOMs('pizzaGC-grid', GC_DATA.map(function(r) {
+        return { nome: r.unidade, cota: r.cota, consumo: r.consumo };
+      }));
+    }
+
+    function calcGC() {
+      var inputs = document.querySelectorAll('[data-gc]');
+      inputs.forEach(function(el) {
+        var idx = parseInt(el.getAttribute('data-gc'));
+        var field = el.getAttribute('data-field');
+        GC_DATA[idx][field] = parseFloat(el.value) || 0;
+      });
+      var totalCota = 0, totalConsumo = 0, totalSaldo = 0;
+      var totalD3 = 0, totalJac = 0, totalIIQ = 0;
+
+      GC_DATA.forEach(function(r, i) {
+        var saldo = r.cota - r.consumo;
+        var pct = r.cota > 0 ? (saldo / r.cota * 100) : 0;
+        var saldoClass = pct > 100 ? 'pos' : pctClass(pct);
+        totalCota += r.cota; totalConsumo += r.consumo; totalSaldo += saldo;
+        totalD3 += r.distr3; totalJac += r.jacare; totalIIQ += r.iiq;
+
+        var saldoEl = document.getElementById('gc-saldo-' + i);
+        var pctEl = document.getElementById('gc-pct-' + i);
+        if (saldoEl) { saldoEl.textContent = fmt(saldo); saldoEl.className = 'num ' + saldoClass; }
+        if (pctEl) { pctEl.innerHTML = '<span class="pct-bar"><span style="font-weight:600;color:' + pctColor(pct > 100 ? 100 : pct) + '">' + pct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(pct) + '%;background:' + pctColor(pct > 100 ? 100 : pct) + '"></span></span></span>'; }
+      });
+
+      var tPct = totalCota > 0 ? (totalSaldo / totalCota * 100) : 0;
+      var tsEl = document.getElementById('gc-total-saldo');
+      var tpEl = document.getElementById('gc-total-pct');
+      if (tsEl) { tsEl.textContent = fmt(totalSaldo); tsEl.className = 'num ' + pctClass(tPct); }
+      if (tpEl) { tpEl.innerHTML = '<span class="pct-bar"><span style="font-weight:700;color:' + pctColor(tPct) + '">' + tPct.toFixed(1) + '%</span><span class="bar-track"><span class="bar-fill" style="width:' + barPct(tPct) + '%;background:' + pctColor(tPct) + '"></span></span></span>'; }
+
+      document.getElementById('gc-stats').innerHTML =
+        '<div class="stat-card"><span class="stat-number">' + fmt(totalCota) + '</span><span class="stat-label">Cota Total</span></div>' +
+        '<div class="stat-card follow"><span class="stat-number">' + fmt(totalConsumo) + '</span><span class="stat-label">Consumo</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + fmt(totalSaldo) + '</span><span class="stat-label">Saldo Geral</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + tPct.toFixed(1) + '%</span><span class="stat-label">% Saldo</span></div>' +
+        '<div class="stat-card deadline"><span class="stat-number">' + fmt(totalD3) + '</span><span class="stat-label">Cota 3º Trim</span></div>' +
+        '<div class="stat-card overdue"><span class="stat-number">' + fmt(totalJac) + '</span><span class="stat-label">FT Jacaré</span></div>';
+
+      desenharPizzaOMs('pizzaGC-grid', GC_DATA.map(function(r) {
+        return { nome: r.unidade, cota: r.cota, consumo: r.consumo };
+      }));
+      registrarAlteracao();
+    }
+
+    // ==================== RENDER FALCÃO ====================
+    function renderFalcon() {
+      var tbody = document.getElementById('falcon-body');
+      var html = '';
+      var totOD = 0, totGC = 0;
+      FALCON_DATA.forEach(function(r, i) {
+        totOD += r.od; totGC += r.gc;
+        var total = r.od + r.gc;
+        html += '<tr><td>' + r.unidade + '</td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.od + '" data-falcon="' + i + '" data-field="od" oninput="calcFalcon()"></td>' +
+          '<td class="num"><input class="fuel-input" type="number" value="' + r.gc + '" data-falcon="' + i + '" data-field="gc" oninput="calcFalcon()"></td>' +
+          '<td class="num" id="falcon-total-' + i + '">' + fmt(total) + '</td></tr>';
+      });
+      html += '<tr class="total-row"><td>Total</td><td class="num">' + fmt(totOD) + '</td><td class="num">' + fmt(totGC) + '</td><td class="num">' + fmt(totOD + totGC) + '</td></tr>';
+      tbody.innerHTML = html;
+
+      document.getElementById('falcon-stats').innerHTML =
+        '<div class="stat-card"><span class="stat-number">' + fmt(totOD) + '</span><span class="stat-label">Total OD</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + fmt(totGC) + '</span><span class="stat-label">Total GC</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + FALCON_DATA.filter(function(r){return r.od>0;}).length + '</span><span class="stat-label">OMs com OD</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + FALCON_DATA.filter(function(r){return r.gc>0;}).length + '</span><span class="stat-label">OMs com GC</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + fmt(totOD + totGC) + '</span><span class="stat-label">Cota Total</span></div>';
+    }
+
+    function calcFalcon() {
+      var totOD = 0, totGC = 0;
+      FALCON_DATA.forEach(function(r, i) {
+        var odInput = document.querySelector('[data-falcon="' + i + '"][data-field="od"]');
+        var gcInput = document.querySelector('[data-falcon="' + i + '"][data-field="gc"]');
+        r.od = parseFloat(odInput.value) || 0;
+        r.gc = parseFloat(gcInput.value) || 0;
+        var total = r.od + r.gc;
+        totOD += r.od; totGC += r.gc;
+        document.getElementById('falcon-total-' + i).textContent = fmt(total);
+      });
+
+      var grandTotal = totOD + totGC;
+      var totalRow = document.querySelector('#falcon-body .total-row');
+      var cells = totalRow.querySelectorAll('td');
+      cells[1].textContent = fmt(totOD);
+      cells[2].textContent = fmt(totGC);
+      cells[3].textContent = fmt(grandTotal);
+
+      document.getElementById('falcon-stats').innerHTML =
+        '<div class="stat-card"><span class="stat-number">' + fmt(totOD) + '</span><span class="stat-label">Total OD</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + fmt(totGC) + '</span><span class="stat-label">Total GC</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + FALCON_DATA.filter(function(r){return r.od>0;}).length + '</span><span class="stat-label">OMs com OD</span></div>' +
+        '<div class="stat-card resolved"><span class="stat-number">' + FALCON_DATA.filter(function(r){return r.gc>0;}).length + '</span><span class="stat-label">OMs com GC</span></div>' +
+        '<div class="stat-card"><span class="stat-number">' + fmt(grandTotal) + '</span><span class="stat-label">Cota Total</span></div>';
+      registrarAlteracao();
+    }
+
+    // ==================== PIZZA POR OM ====================
+    var OM_COLORS = ['#2d5016', '#c0392b', '#d4a017'];
+    var OM_COLORS_LIGHT = ['#5a8a3a', '#e74c3c', '#f0c040'];
+
+    function desenharPizzaOMs(gridId, dados) {
+      var grid = document.getElementById(gridId);
+      var html = '';
+
+      dados.forEach(function(r) {
+        var cota = r.cota;
+        var consumo = r.consumo;
+        var saldo = cota - consumo;
+        var canvasId = gridId + '-c-' + r.nome.replace(/\s+/g, '-');
+
+        html += '<div class="om-pizza-card">' +
+          '<div class="om-name">' + r.nome + '</div>' +
+          '<canvas id="' + canvasId + '" width="80" height="80"></canvas>' +
+          '<div class="om-legend">' +
+            '<div class="om-legend-row"><span class="om-legend-dot" style="background:' + OM_COLORS[1] + '"></span><span class="om-legend-label">Consumo</span><span class="om-legend-val">' + fmt(consumo) + '</span></div>' +
+            '<div class="om-legend-row"><span class="om-legend-dot" style="background:' + OM_COLORS[2] + '"></span><span class="om-legend-label">Saldo</span><span class="om-legend-val">' + fmt(saldo) + '</span></div>' +
+            '<div class="om-legend-row" style="border-top:1px solid rgba(0,0,0,0.08);padding-top:3px;margin-top:1px"><span class="om-legend-dot" style="background:' + OM_COLORS[0] + '"></span><span class="om-legend-label" style="font-weight:700;color:var(--text)">Cota</span><span class="om-legend-val" style="color:var(--primary)">' + fmt(cota) + '</span></div>' +
+          '</div>' +
+        '</div>';
+      });
+
+      grid.innerHTML = html;
+
+      dados.forEach(function(r) {
+        var canvasId = gridId + '-c-' + r.nome.replace(/\s+/g, '-');
+        var canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var w = canvas.width, h = canvas.height;
+        var cx = w / 2, cy = h / 2;
+        var rad = Math.min(cx, cy) - 4;
+        var innerRad = rad * 0.52;
+        var cota = r.cota, consumo = r.consumo, saldo = cota - consumo;
+        var total = cota;
+
+        ctx.clearRect(0, 0, w, h);
+
+        if (total <= 0) {
+          ctx.fillStyle = '#e8e8e8';
+          ctx.beginPath(); ctx.arc(cx, cy, rad, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.arc(cx, cy, innerRad, 0, Math.PI * 2);
+          ctx.fillStyle = '#fff'; ctx.fill();
+          ctx.fillStyle = '#999';
+          ctx.font = 'bold 9px IBM Plex Mono';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('0', cx, cy);
+          return;
+        }
+
+        var slices = [
+          { val: Math.max(consumo, 0), cor: OM_COLORS[1] },
+          { val: Math.max(saldo, 0), cor: OM_COLORS[2] }
+        ];
+
+        var startAngle = -Math.PI / 2;
+        slices.forEach(function(s) {
+          if (s.val <= 0) return;
+          var fatia = (s.val / total) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.arc(cx, cy, rad, startAngle, startAngle + fatia);
+          ctx.arc(cx, cy, innerRad, startAngle + fatia, startAngle, true);
+          ctx.closePath();
+          ctx.fillStyle = s.cor;
+          ctx.fill();
+
+          if (fatia > 0.3) {
+            var mid = startAngle + fatia / 2;
+            var tx = cx + Math.cos(mid) * ((rad + innerRad) / 2);
+            var ty = cy + Math.sin(mid) * ((rad + innerRad) / 2);
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 8px IBM Plex Mono';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText((s.val / total * 100).toFixed(0) + '%', tx, ty);
+          }
+
+          startAngle += fatia;
+        });
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+        ctx.arc(cx, cy, innerRad, 0, Math.PI * 2, true);
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+    }
+
+    // ==================== TAB SWITCH ====================
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
+      document.querySelector('.tab[data-tab="' + tab + '"]').classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+    }
+
+    // ==================== CLOCK ====================
+    function atualizarRelogio() {
+      var agora = new Date();
+      var meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      document.getElementById('currentDate').textContent = agora.getDate() + ' ' + meses[agora.getMonth()] + '. ' + agora.getFullYear() + ' — ' + agora.toLocaleTimeString('pt-BR');
+    }
+
+    // ==================== INIT ====================
+    renderOD();
+    renderGC();
+    renderFalcon();
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 1000);
+  </script>
+</body>
+</html>
