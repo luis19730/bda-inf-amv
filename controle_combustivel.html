@@ -279,9 +279,61 @@
       .painel-section.page-break-before { page-break-before: always; }
       .painel-print-btns { display: none !important; }
     }
+
+    /* Login / Cover Screen */
+    #loginOverlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(135deg, #1a2a0f 0%, #2d4a1a 50%, #1a2a0f 100%);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    #loginOverlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .login-box {
+      background: rgba(255,255,255,0.06); backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 20px;
+      padding: 48px 40px; text-align: center; width: 380px; max-width: 92vw;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .login-box img {
+      width: 120px; height: 120px; object-fit: contain; border-radius: 16px;
+      margin-bottom: 20px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    }
+    .login-box h2 { color: #fff; font-size: 1.3rem; margin: 0 0 4px; font-weight: 700; }
+    .login-box .login-sub { color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-bottom: 28px; }
+    .login-box input {
+      width: 100%; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px; background: rgba(255,255,255,0.08); color: #fff;
+      font-size: 1rem; text-align: center; letter-spacing: 2px; outline: none;
+      transition: border-color 0.3s;
+    }
+    .login-box input::placeholder { color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+    .login-box input:focus { border-color: #a0c45a; box-shadow: 0 0 0 3px rgba(160,196,90,0.2); }
+    .login-box button {
+      width: 100%; margin-top: 16px; padding: 14px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg, #556b2f, #6b8e23); color: #fff;
+      font-size: 1rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .login-box button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(85,107,47,0.4); }
+    .login-error { color: #ff6b6b; font-size: 0.8rem; margin-top: 12px; display: none; }
+    .login-box .login-footer { color: rgba(255,255,255,0.25); font-size: 0.65rem; margin-top: 20px; }
   </style>
 </head>
 <body>
+
+  <div id="loginOverlay">
+    <div class="login-box">
+      <img src="https://drive.google.com/uc?export=view&id=1ga-q9YrRgAc9xohQwN_X8pOlS97rRjfZ" alt="Logo BDA">
+      <h2>BDA Inf Amv</h2>
+      <div class="login-sub">Controle de Combust&iacute;vel</div>
+      <input type="password" id="loginPass" placeholder="Digite a senha" autocomplete="off"
+             onkeydown="if(event.key==='Enter')checkLogin()">
+      <button onclick="checkLogin()">Acessar</button>
+      <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
+      <div class="login-footer">E4 / Bda Inf Amv</div>
+    </div>
+  </div>
+
   <header>
     <div class="header-content">
       <img src="LOGO-BDA-AMV-site.png" alt="Logo BDA Inf Amv" class="header-logo">
@@ -318,6 +370,7 @@
             <th class="num">Cota IIQ</th>
             <th class="num">Remanej 1</th>
             <th class="num">Remanej 2</th>
+            <th class="num" style="font-size:0.7rem">Última Alt.</th>
           </tr>
         </thead>
         <tbody id="od-body"></tbody>
@@ -344,6 +397,7 @@
             <th class="num">Distr Cota <span class="trim-edit" id="gc-trim-label" contenteditable="true" onblur="updateTrimLabel('gc')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}">3</span>º Trim</th>
             <th class="num">Cota FT Jacaré</th>
             <th class="num">Cota IIQ</th>
+            <th class="num" style="font-size:0.7rem">Última Alt.</th>
           </tr>
         </thead>
         <tbody id="gc-body"></tbody>
@@ -444,6 +498,15 @@
       { unidade: "12º Pel PE", od: 0, gc: 0 }
     ];
 
+    var OD_TS = new Array(OD_DATA.length).fill('');
+    var GC_TS = new Array(GC_DATA.length).fill('');
+    var FALCON_TS = new Array(FALCON_DATA.length).fill('');
+
+    function nowStr() {
+      var d = new Date();
+      return ('0' + d.getDate()).slice(2) + '/' + ('0' + (d.getMonth()+1)).slice(2) + '/' + d.getFullYear() + ' ' + ('0' + d.getHours()).slice(2) + ':' + ('0' + d.getMinutes()).slice(2) + ':' + ('0' + d.getSeconds()).slice(2);
+    }
+
     // ==================== HELPERS ====================
     function fmt(n) {
       if (n === null || n === undefined || isNaN(n)) return '-';
@@ -457,6 +520,24 @@
       var h = agora.toLocaleTimeString('pt-BR');
       document.getElementById('lastModified').textContent = 'Última alteração: ' + d + ' às ' + h;
     }
+
+    // ==================== LOGIN ====================
+    function checkLogin() {
+      var pass = document.getElementById('loginPass').value;
+      if (pass === '4secamv') {
+        sessionStorage.setItem('auth_bda', '1');
+        document.getElementById('loginOverlay').classList.add('hidden');
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('loginPass').value = '';
+        document.getElementById('loginPass').focus();
+      }
+    }
+    (function() {
+      if (sessionStorage.getItem('auth_bda') === '1') {
+        document.getElementById('loginOverlay').classList.add('hidden');
+      }
+    })();
 
     function updateTrimLabel(prefix) {
       var el = document.getElementById(prefix + '-trim-label');
@@ -505,6 +586,7 @@
           '<td class="num"><input class="fuel-input" type="number" value="' + r.iiq + '" data-od="' + i + '" data-field="iiq" onchange="calcOD()" oninput="calcOD()"></td>' +
           '<td class="num"><input class="fuel-input" type="number" value="' + r.rem1 + '" data-od="' + i + '" data-field="rem1" onchange="calcOD()" oninput="calcOD()"></td>' +
           '<td class="num"><input class="fuel-input" type="number" value="' + r.rem2 + '" data-od="' + i + '" data-field="rem2" onchange="calcOD()" oninput="calcOD()"></td>' +
+          '<td class="num" style="font-size:0.7rem;white-space:nowrap" id="od-ts-' + i + '">' + (OD_TS[i] || '—') + '</td>' +
         '</tr>';
       });
 
@@ -520,6 +602,7 @@
         '<td class="num">' + fmt(totalIIQ) + '</td>' +
         '<td class="num">-</td>' +
         '<td class="num">-</td>' +
+        '<td class="num" style="font-size:0.7rem">—</td>' +
       '</tr>';
       tbody.innerHTML = html;
 
@@ -538,11 +621,19 @@
 
     function calcOD() {
       var inputs = document.querySelectorAll('[data-od]');
+      var changedIdx = -1;
       inputs.forEach(function(el) {
         var idx = parseInt(el.getAttribute('data-od'));
         var field = el.getAttribute('data-field');
-        OD_DATA[idx][field] = parseFloat(el.value) || 0;
+        var newVal = parseFloat(el.value) || 0;
+        if (OD_DATA[idx][field] !== newVal) changedIdx = idx;
+        OD_DATA[idx][field] = newVal;
       });
+      if (changedIdx >= 0) {
+        OD_TS[changedIdx] = nowStr();
+        var tsEl = document.getElementById('od-ts-' + changedIdx);
+        if (tsEl) tsEl.textContent = OD_TS[changedIdx];
+      }
       var totalCota = 0, totalConsumo = 0, totalSaldo = 0;
       var totalD3 = 0, totalJac = 0, totalIIQ = 0;
 
@@ -601,6 +692,7 @@
           '<td class="num"><input class="fuel-input" type="number" value="' + r.distr3 + '" data-gc="' + i + '" data-field="distr3" onchange="calcGC()" oninput="calcGC()"></td>' +
           '<td class="num"><input class="fuel-input" type="number" value="' + r.jacare + '" data-gc="' + i + '" data-field="jacare" onchange="calcGC()" oninput="calcGC()"></td>' +
           '<td class="num"><input class="fuel-input" type="number" value="' + r.iiq + '" data-gc="' + i + '" data-field="iiq" onchange="calcGC()" oninput="calcGC()"></td>' +
+          '<td class="num" style="font-size:0.7rem;white-space:nowrap" id="gc-ts-' + i + '">' + (GC_TS[i] || '—') + '</td>' +
         '</tr>';
       });
 
@@ -614,6 +706,7 @@
         '<td class="num">' + fmt(totalD3) + '</td>' +
         '<td class="num">' + fmt(totalJac) + '</td>' +
         '<td class="num">' + fmt(totalIIQ) + '</td>' +
+        '<td class="num" style="font-size:0.7rem">—</td>' +
       '</tr>';
       tbody.innerHTML = html;
 
@@ -632,11 +725,19 @@
 
     function calcGC() {
       var inputs = document.querySelectorAll('[data-gc]');
+      var changedIdx = -1;
       inputs.forEach(function(el) {
         var idx = parseInt(el.getAttribute('data-gc'));
         var field = el.getAttribute('data-field');
-        GC_DATA[idx][field] = parseFloat(el.value) || 0;
+        var newVal = parseFloat(el.value) || 0;
+        if (GC_DATA[idx][field] !== newVal) changedIdx = idx;
+        GC_DATA[idx][field] = newVal;
       });
+      if (changedIdx >= 0) {
+        GC_TS[changedIdx] = nowStr();
+        var tsEl = document.getElementById('gc-ts-' + changedIdx);
+        if (tsEl) tsEl.textContent = GC_TS[changedIdx];
+      }
       var totalCota = 0, totalConsumo = 0, totalSaldo = 0;
       var totalD3 = 0, totalJac = 0, totalIIQ = 0;
 
